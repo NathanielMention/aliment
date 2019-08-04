@@ -1,10 +1,26 @@
+//creates type of node element you pass in the parameters
+const createnode = (element) => document.createElement(element);
+//appends second parameter(el) to the first(parent)
+const append = (parent, el) => parent.appendChild(el); 
+
+
 const submitFood = () => {
 
 	const foodInputValue = document.querySelector('.searchFood').value
+
 	// takes user input value/food value and returns fetched data
 	getFood(foodInputValue)
 	.then(response => response.json())
-	.then(data => console.log(data))
+	.then((data) => {
+		const foodList = data.hits; //get results
+		const ul = document.querySelector('.foodList');
+		foodList.forEach((food) => { //
+			const li = createnode ('li'); 
+			console.log(food.fields);
+			li.textContent = food.fields.item_name + food.fields.nf_calories + food.fields.nf_serving_size_qty + food.fields.nf_serving_size_unit;
+			append(ul,li);
+		})
+	})
 	.catch(error => console.log(error))
 }
 
@@ -22,4 +38,6 @@ const getFood = (foodValue) => {
 const button = document.getElementById('submit');
 
 button.addEventListener('click', submitFood);
+;
+
 
