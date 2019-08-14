@@ -8,21 +8,38 @@ const submitFood = () => {
 
 	const foodInputValue = document.querySelector('.searchFood').value
 
-	// takes user input value/food value and returns fetched data
+	// takes user input value/food value and returns fetched data in ul
 	getFood(foodInputValue)
 	.then(response => response.json())
 	.then((data) => {
-		const foodList = data.hits; //get results
+		const foodList = data.hits; 
 		const ul = document.querySelector('.foodList');
+		//go through foodlist array one by one to create list of food
 		foodList.forEach((food) => { //
 			const li = createnode ('li'); 
-			console.log(food.fields);
-			li.textContent = food.fields.item_name + food.fields.nf_calories + food.fields.nf_serving_size_qty + food.fields.nf_serving_size_unit;
+			const itemName = food.fields.item_name;
+			const calories = food.fields.nf_calories;
+			const servingSize = food.fields.nf_serving_size_qty;
+			const units = food.fields.nf_serving_size_unit;
+			li.textContent = `${itemName} ${calories} calories ${servingSize} ${units}`;
 			append(ul,li);
+
 		})
+
+		//use event delgation to make foodlist clickable
+		ul.addEventListener('click', (e) => {
+				const userUl = document.querySelector('.userList');
+				const target = e.target;
+				if (target.matches('li')) {
+					const userLi = createnode('li');
+					userLi.textContent = target.textContent;
+					append(userUl,userLi);
+				}	
+			})
 	})
 	.catch(error => console.log(error))
 }
+
 
 const getFood = (foodValue) => {
 	//break down url of api into consts
@@ -39,5 +56,6 @@ const button = document.getElementById('submit');
 
 button.addEventListener('click', submitFood);
 ;
+
 
 
