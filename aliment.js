@@ -1,19 +1,42 @@
-//creates type of node element you pass in the parameters
-const createnode = (element) => document.createElement(element);
-//appends second parameter(el) to the first(parent)
-const append = (parent, el) => parent.appendChild(el); 
+const createnode = (element) => document.createElement(element)
 
+const append = (parent, el) => parent.appendChild(el)
 
-const submitFood = () => {
+const remove = (parent, el) => parent.removeChild(el)
 
+let calorieAmount = 0;
+
+const updateCalorieCount = () => {
+    let totalCalories = document.querySelector('.totalCalories');
+    totalCalories.textContent = `Calories: ${calorieAmount}`;
+}
+
+const incrementCalories = (target) => {
+	calorieAmount += Number(target.dataset.calories);
+	updateCalorieCount();
+}
+
+const decrementCalories = (target) => {
+	calorieAmount -= Number(target.dataset.calories);
+	updateCalorieCount();
+}
+
+const submitFood = (e) => {
+	//prevent default page reload
+	e.preventDefault();
 	const foodInputValue = document.querySelector('.searchFood').value
-
+	const ul = document.querySelector('.foodList');
+	//clear foodlist
+	if (ul.children.length > 0) {
+    	while (ul.children.length > 0) {
+      		remove(ul, ul.firstChild);
+    	}
+  	}
 	// takes user input value/food value and returns fetched data in ul
 	getFood(foodInputValue)
 	.then(response => response.json())
 	.then((data) => {
 		const foodList = data.hits; 
-		const ul = document.querySelector('.foodList');
 		//go through foodlist array one by one to create list of food
 		foodList.forEach((food) => { //
 			const li = createnode ('li'); 
@@ -21,10 +44,14 @@ const submitFood = () => {
 			const calories = food.fields.nf_calories;
 			const servingSize = food.fields.nf_serving_size_qty;
 			const units = food.fields.nf_serving_size_unit;
+			//use dataset property to store calories value in each <li>
+			li.dataset.calories = calories;
 			li.textContent = `${itemName} ${calories} calories ${servingSize} ${units}`;
 			append(ul,li);
 
 		})
+
+	
 
 		//use event delgation to make foodlist clickable
 		ul.addEventListener('click', (e) => {
@@ -34,8 +61,22 @@ const submitFood = () => {
 					const userLi = createnode('li');
 					userLi.textContent = target.textContent;
 					append(userUl,userLi);
-				}	
+
+					incrementCalories(target);
+					//make userUL clickable and <li> removable
+					userLi.addEventListener('click', (e) => {
+					if(target.matches('li')) {
+						remove(userUl,userLi);
+						decrementCalories(target);
+					}
+
+					updateCalorieCount(target);
+				})
+
+				}
+	
 			})
+
 	})
 	.catch(error => console.log(error))
 }
@@ -51,11 +92,18 @@ const getFood = (foodValue) => {
 	return fetch(`${api}${foodValue}?${fields}${alimentId}${alimentKey}`)
 }
 
-// create button so user can submit input value
-const button = document.getElementById('submit');
+// allow user to submit input value
+const form = document.querySelector('.searchForm');
 
-button.addEventListener('click', submitFood);
-;
+form.addEventListener('submit', submitFood);
 
+const input = document.querySelector('.searchFood');
+//allow user to submit food with enter key
+input.addEventListener('keyup', (e) => {
+ 	const key = e.key || e.keyCode;
+	if (key === 'Enter' || key === 'enter' || key === 13) {
+        submitFood(e);
+    }
+});
 
 
