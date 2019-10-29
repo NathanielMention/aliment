@@ -1,3 +1,4 @@
+console.log('hello');
 const createnode = (element) => document.createElement(element)
 
 const append = (parent, el) => parent.appendChild(el)
@@ -105,5 +106,4 @@ input.addEventListener('keyup', (e) => {
         submitFood(e);
     }
 });
-
 
