@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('alimentdb', 'postgres', '9x9yu18xu0p', {
+module.exports = new Sequelize('alimentdb', 'nathanielmention', '9x9yu18xu0p', {
   host: 'localhost',
   dialect: 'postgres',
 

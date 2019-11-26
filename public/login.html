@@ -5,15 +5,16 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<form method="post" action="/users/login">
+	<div><ul class="error"></ul></div>
+	<form class="loginForm" method="post" action="/login">
 		<label for="username">Username</label>
-		<input type="text" name="username" placeholder="Username or Email" required>
+		<input type="text" class="username" name="username" placeholder="Username or Email" required>
 		
 		<label for="password">Password</label>
-		<input type="text" name="password" placeholder="Password" required>
+		<input type="text" class="password" name="password" placeholder="Password" required>
 
 		<button type="submit" value="Login">Login</button>
 	</form>
-	<script src="./scripts/aliment.js"></script>
+	<script src="./scripts/login.js"></script>
 </body>
 </html>

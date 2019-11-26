@@ -1,22 +1,39 @@
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 const alimentUser = db.define('alimentUser', {
 	id: {
-		type: Sequilize.STRING
-	},	
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+   	    autoIncrement: true
+ 	},
 	username: {
-		type: Sequilize.STRING
+		type: Sequelize.STRING,
+		allowNull: false
 	},
 	password: {
-		type: Sequilize.STRING
+		type: Sequelize.STRING,
+		allowNull: false
 	},
 	calories: {
-		type: Sequilize.STRING
+		type: Sequelize.DECIMAL,
+		
 	},
 	time: {
-		type: Sequilize.STRING
+		type: Sequelize.DATE,
+		
 	}
-})
+}, {
+	freezeTableName: true
+});
+
+alimentUser.sync({ force: false, alter: true }).then(() => {
+  return alimentUser.create({
+    username: 'test',
+    password: 'test',
+    calories: 2000.5,
+    time: 11/5/18
+  });
+});
 
 module.exports = alimentUser;

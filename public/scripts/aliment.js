@@ -1,9 +1,11 @@
-console.log('hello');
 const createnode = (element) => document.createElement(element)
-
 const append = (parent, el) => parent.appendChild(el)
-
 const remove = (parent, el) => parent.removeChild(el)
+
+const alimentDate = new Date(Date.now()).toLocaleString().split(',')[0];
+const calenderDate = document.querySelector('.calenderDate');
+calenderDate.textContent = `${alimentDate}`;
+
 
 let calorieAmount = 0;
 

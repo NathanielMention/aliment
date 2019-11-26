@@ -5,14 +5,19 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<form method="post" action="users/signup">
+	<div><ul class="error"></ul></div>
+	<form class="signupForm" method="post" action="/signup">
 		<label for="username">Username</label>
-		<input type="text" name="username" placeholder="Username or Email" required>
+		<input type="text" class="username" name="username" placeholder="Username or Email" >
 
 		<label for="password">Password</label>
-		<input type="text" name="password" placeholder="Password" required>
+		<input type="text" class="password" name="password" placeholder="Create Password" >
+
+		<label for="password">Confirm Password</label>
+		<input type="text" class="confirmPassword" name="password" placeholder="Confirm Password" >
 
 		<button type="submit" value="Signup">Signup</button>
 	</form>
+	<script src="./scripts/signup.js"></script>
 </body>
 </html>
