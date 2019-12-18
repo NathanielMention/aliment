@@ -2,26 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const router = express.Router();
-
-//database
+const app = express();
+const aliment = require('./routes/alimentRoutes')
 const db = require('./config/database');
+
+
+app.use(express.static('./public'))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 //test DB
 db.authenticate()
 .then(() => console.log('Database connected..'))
 .catch(err => console.log('Error:' + err))
 
-const app = express();
-
-//static pages
-app.use(express.static('./public'))
-
-//aliment routes
-const aliment = require('./routes/alimentRoutes')
 
 app.use('/', aliment)
-app.use('/signup', aliment)
-app.use('/login', aliment)
 
 //listen to port
 app.listen(3000);

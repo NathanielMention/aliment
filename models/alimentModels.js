@@ -27,7 +27,7 @@ const alimentUser = db.define('alimentUser', {
 	freezeTableName: true
 });
 
-alimentUser.sync({ force: false, alter: true }).then(() => {
+alimentUser.sync({ force: false, alter: false }).then(() => {
   return alimentUser.create({
     username: 'test',
     password: 'test',
