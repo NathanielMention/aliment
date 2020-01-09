@@ -2,6 +2,7 @@ const createnode = (element) => document.createElement(element)
 const append = (parent, el) => parent.appendChild(el)
 const remove = (parent, el) => parent.removeChild(el)
 
+//show current date for home page
 const alimentDate = new Date(Date.now()).toLocaleString().split(',')[0];
 const calenderDate = document.querySelector('.calenderDate');
 calenderDate.textContent = `${alimentDate}`;
@@ -25,21 +26,25 @@ const decrementCalories = (target) => {
 }
 
 const submitFood = (e) => {
-	//prevent default page reload
+	
 	e.preventDefault();
+	
 	const foodInputValue = document.querySelector('.searchFood').value
 	const ul = document.querySelector('.foodList');
+	
 	//clear foodlist
 	if (ul.children.length > 0) {
     	while (ul.children.length > 0) {
       		remove(ul, ul.firstChild);
     	}
   	}
+	
 	// takes user input value/food value and returns fetched data in ul
 	getFood(foodInputValue)
 	.then(response => response.json())
 	.then((data) => {
 		const foodList = data.hits; 
+		
 		//go through foodlist array one by one to create list of food
 		foodList.forEach((food) => { //
 			const li = createnode ('li'); 
@@ -47,6 +52,7 @@ const submitFood = (e) => {
 			const calories = food.fields.nf_calories;
 			const servingSize = food.fields.nf_serving_size_qty;
 			const units = food.fields.nf_serving_size_unit;
+			
 			//use dataset property to store calories value in each <li>
 			li.dataset.calories = calories;
 			li.textContent = `${itemName} ${calories} calories ${servingSize} ${units}`;
@@ -55,7 +61,6 @@ const submitFood = (e) => {
 		})
 
 	
-
 		//use event delgation to make foodlist clickable
 		ul.addEventListener('click', (e) => {
 				const userUl = document.querySelector('.userList');
@@ -66,6 +71,7 @@ const submitFood = (e) => {
 					append(userUl,userLi);
 
 					incrementCalories(target);
+					
 					//make userUL clickable and <li> removable
 					userLi.addEventListener('click', (e) => {
 					if(target.matches('li')) {
@@ -91,6 +97,7 @@ const getFood = (foodValue) => {
 	const alimentId = '&appId=67e4c01d';
 	const alimentKey = '&appKey=35d36f51e95d5950f113f861be86c0ba';
 	const fields = '&fields=item_name,brand_name,item_id,nf_calories';
+	
 	//template literals to return fetch call of url/api as a parameter
 	return fetch(`${api}${foodValue}?${fields}${alimentId}${alimentKey}`)
 }
@@ -101,6 +108,7 @@ const form = document.querySelector('.searchForm');
 form.addEventListener('submit', submitFood);
 
 const input = document.querySelector('.searchFood');
+
 //allow user to submit food with enter key
 input.addEventListener('keyup', (e) => {
  	const key = e.key || e.keyCode;

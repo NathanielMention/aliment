@@ -3,7 +3,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const router = express.Router();
 const app = express();
+
+//routes
 const aliment = require('./routes/alimentRoutes')
+
+//database
 const db = require('./config/database');
 
 

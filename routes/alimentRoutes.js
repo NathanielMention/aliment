@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../config/database');
-const model = require('../models/alimentModels');
-const { body, check, validationResult } = require('express-validator');
 
+//database
+const db = require('../config/database');
+
+//models
+const model = require('../models/alimentModels');
+
+//express-validator
+const { body, check, validationResult } = require('express-validator');
 
 
 router.get('/', (req, res) => {
@@ -30,8 +34,6 @@ router.post('/signup', [
 		.isAlphanumeric()
 		.withMessage('Username must have letters or numbers and no spaces')
 		.custom((value, {req}) => {
-			console.log(value);
-			console.log(req.body.username);
 			return model.findOne({ where: {username: req.body.username} })
 			.then(model => {
 				if (model) {
@@ -60,11 +62,8 @@ router.post('/signup', [
 
   		})
 
-
-
 	], (req, res) => {
-	//object destructuring 
-	const { username, password, calories, time } = req.body;
+	const { username, password } = req.body;
 
 	//errors from sign up validation
 	const errors = validationResult(req);
@@ -72,17 +71,16 @@ router.post('/signup', [
     	return res.status(422).json({ errors: errors.array() });
   	}
 
+
 	model.create({
 		username,
-		password,
-		calories,
-		time
+		password
 	})
-		.then(alimentUser => {
-			res.json('welcome, ' + req.body.username)
-			})
+		.then(model => {
+			res.json({success: true});
+		})
 		.catch(err => console.log(err));
-	})
+		})
 
 
 router.get('/login', (req,res) => {
@@ -95,22 +93,42 @@ router.post('/login', [
 		check('username')
 		.not()
 		.isEmpty()
-		.withMessage('Username is required'),
+		.withMessage('Username is required')
+		.custom((value, {req}) => {
+			return model.findOne({ where: {username: req.body.username} })
+			.then(model => {
+				if (!model) {
+					return Promise.reject('Username does not exists');
+				}
+			})
+		}),
 	
 		check('password')
 		.not()
 		.isEmpty()
 		.withMessage('Password is required')
+		.custom((value, {req}) => {
+			return model.findOne({ where: {username: req.body.username} })
+			.then(async model => {
+				console.log(value);
+				if (!await model.validPassword(value)) {
+					return Promise.reject('Password is incorrect');
+				}
+			})
+		})
 
 	],(req, res) => {
 
-	const { username, password, calories, time } = req.body;
+		
 	//errors from login validation
 	const loginErrors = validationResult(req);
 
-		if (!loginErrors.isEmpty()) {
+	if (!loginErrors.isEmpty()) {	
     	return res.status(422).json({ loginErrors: loginErrors.array() });
-  	}
+  	} 
+	else {
+		res.json({success: true});
+	}
 	
 });
 

@@ -11,7 +11,7 @@ form.addEventListener('submit', (e) => {
 	//client side form validation
 	const messages = [];
 
-	if (username.value === '' || name.value == null) {
+	if (username.value === '' || username.value == null) {
 		messages.push('Username is required');
 	}
 
@@ -43,13 +43,13 @@ form.addEventListener('submit', (e) => {
 	})
 	.then((res) => res.json())
 	.then(data => {
-		console.log(data);
-		if(data.loginErrors.length > 0){
+		if(data.loginErrors && data.loginErrors.length > 0){
 			data.loginErrors.forEach((err) => (
 				errorElement.innerHTML += `<li>${err.msg}</li>`			
 			))
 		}
 		else {
+			console.log('TEST!!!!!!!!!!')
 			window.location.href = '/';
 		}
 	})
