@@ -37,14 +37,17 @@ form.addEventListener("submit", e => {
     //make sure to serialize your JSON body
     body: JSON.stringify(data)
   })
-    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      return res.json();
+    })
     .then(data => {
       if (data.loginErrors && data.loginErrors.length > 0) {
         data.loginErrors.forEach(
           err => (errorElement.innerHTML += `<li>${err.msg}</li>`)
         );
       } else {
-        window.location.href = "/";
+        window.location.href = "/home";
       }
     })
     .catch(error => console.log(error));

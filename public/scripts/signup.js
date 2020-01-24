@@ -56,7 +56,7 @@ form.addEventListener("submit", e => {
           err => (errorElement.innerHTML += `<li>${err.msg}</li>`)
         );
       } else {
-        window.location.href = "/";
+        window.location.href = "/login";
       }
     })
     .catch(error => console.log(error));

@@ -1,18 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const passport = require("passport");
 
-//models
-const model = require("../models/alimentModels");
+//users
+const user = require("../models/alimentModels");
 
 //express-validator
 const { body, check, validationResult } = require("express-validator");
 
-router.get("/", (req, res) => {
+//access passport config auth
+const auth = require("../config/passport-config");
+const notAuth = require("../config/passport-config");
+
+router.get("/", auth.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/index.html"));
 });
 
-router.get("/signup", (req, res) => {
+router.get("/signup", notAuth.checkNotAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/signup.html"));
 });
 
@@ -30,10 +35,10 @@ router.post(
       .isAlphanumeric()
       .withMessage("Username must have letters or numbers and no spaces")
       .custom((value, { req }) => {
-        return model
+        return user
           .findOne({ where: { username: req.body.username } })
-          .then(model => {
-            if (model) {
+          .then(user => {
+            if (user) {
               return Promise.reject("Username already exists");
             }
           });
@@ -57,6 +62,7 @@ router.post(
       return true;
     })
   ],
+  notAuth.checkNotAuthenticated,
   (req, res) => {
     const { username, password } = req.body;
 
@@ -66,19 +72,19 @@ router.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
-    model
+    user
       .create({
         username,
         password
       })
-      .then(model => {
+      .then(() => {
         res.json({ success: true });
       })
       .catch(err => console.log(err));
   }
 );
 
-router.get("/login", (req, res) => {
+router.get("/login", notAuth.checkNotAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/login.html"));
 });
 
@@ -91,10 +97,10 @@ router.post(
       .isEmpty()
       .withMessage("Username is required")
       .custom((value, { req }) => {
-        return model
+        return user
           .findOne({ where: { username: req.body.username } })
-          .then(model => {
-            if (!model) {
+          .then(user => {
+            if (!user) {
               return Promise.reject("Username does not exists");
             }
           });
@@ -105,16 +111,17 @@ router.post(
       .isEmpty()
       .withMessage("Password is required")
       .custom((value, { req }) => {
-        return model
+        return user
           .findOne({ where: { username: req.body.username } })
-          .then(async model => {
-            console.log(value);
-            if (!(await model.validPassword(value))) {
+          .then(async user => {
+            if (!(await user.validPassword(value))) {
               return Promise.reject("Password is incorrect");
             }
           });
       })
   ],
+  notAuth.checkNotAuthenticated,
+  passport.authenticate("local"),
   (req, res) => {
     //errors from login validation
     const loginErrors = validationResult(req);
@@ -126,5 +133,15 @@ router.post(
     }
   }
 );
+
+router.get("/home", (req, res) => {
+  console.log(req.isAuthenticated());
+  res.sendFile(path.join(__dirname + "/../public/home.html"));
+});
+
+router.delete("/logout", (req, res) => {
+  req.logOut();
+  res.json({ success: true });
+});
 
 module.exports = router;

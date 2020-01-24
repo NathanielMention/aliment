@@ -9,13 +9,15 @@
     <nav>
       <ul>
         <li>
-          <a href="/">Home</a>
+          <a href="/home">Home</a>
         </li>
         <li>
           <a href="/calendar">Calendar</a>
         </li>
         <li>
-          <a href="/login">Login</a>
+          <form action="/logout?_method=DELETE" method="POST">
+            <button type="submit">Logout</button>
+          </form>
         </li>
         <li>
           <a href="/signup">SignUp</a>
@@ -39,6 +41,6 @@
     <ul class="foodList"></ul>
     <ul class="userList"></ul>
     <div class="totalCalories"></div>
-    <script src="./scripts/aliment.js"></script>
+    <script src="./scripts/home.js"></script>
   </body>
 </html>
