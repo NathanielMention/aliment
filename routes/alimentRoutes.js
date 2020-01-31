@@ -66,7 +66,6 @@ router.post(
       return true;
     })
   ],
-  checkNotAuthenticated.checkNotAuthenticated,
   (req, res) => {
     const { username, password } = req.body;
 
@@ -128,8 +127,7 @@ router.post(
           });
       })
   ],
-  checkNotAuthenticated.checkNotAuthenticated,
-  passport.authenticate("local", { session: true }),
+  passport.authenticate("local"),
   (req, res) => {
     //errors from login validation
     const loginErrors = validationResult(req);
@@ -142,15 +140,14 @@ router.post(
   }
 );
 
-router.get("/home", (req, res) => {
+router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/home.html"));
 });
 
 router.delete("/logout", (req, res) => {
-  console.log(req.user, "LOGOUT REQ USERRRRRR!!!!!!!!!");
+  console.log("HEY THIS IS BEFORE LOGOUT!!");
   req.logOut();
   res.json({ success: true });
-  console.log("BACKENDTESTSSS");
 });
 
 module.exports = router;

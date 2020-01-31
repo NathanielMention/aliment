@@ -30,12 +30,14 @@ function initialize(passport, getUserById) {
   passport.serializeUser((user, done) => done(null, user.id));
   //get user from session with id
   passport.deserializeUser(async (id, done) => {
+    const user = await getUserById(id);
     return done(null, await getUserById(id));
   });
 }
 
 //if user is not auth redirect them to login
 function checkAuthenticated(req, res, next) {
+  console.log(req.isAuthenticated(), "checkauthfunc");
   if (req.isAuthenticated()) {
     return next();
   }
@@ -45,10 +47,9 @@ function checkAuthenticated(req, res, next) {
 
 //checks if user is auth redirects to home
 function checkNotAuthenticated(req, res, next) {
-  console.log(req.isAuthenticated(), "REQ IS AUTH@@@@");
-  console.log("TESTSSS#####", req.user);
+  console.log(req.isAuthenticated(), "checkNOTauthfunc");
   if (req.isAuthenticated()) {
-    return res.redirect("/");
+    return res.redirect("/home");
   }
   next();
 }

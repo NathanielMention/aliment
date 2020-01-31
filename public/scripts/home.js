@@ -109,17 +109,21 @@ input.addEventListener("keyup", e => {
   }
 });
 
-fetch("http://127.0.0.1:3000/logout", {
-  method: "DELETE",
-  credentials: "include",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  }
-})
-  .then(res => {
-    return res.json();
+const logOut = document.querySelector(".logOutButton");
+
+logOut.addEventListener("submit", e => {
+  fetch("http://127.0.0.1:3000/logout", {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
   })
-  .then(() => {
-    window.location.href = "/login";
-  });
+    .then(res => {
+      return res.json();
+    })
+    .then(() => {
+      window.location.href = "/login";
+    });
+});

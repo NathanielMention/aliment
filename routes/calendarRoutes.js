@@ -14,6 +14,7 @@ const auth = require("../config/passport-config");
 const notAuth = require("../config/passport-config");
 
 router.get("/calendar", (req, res) => {
+  console.log("calander babbyyyy");
   res.sendFile(path.join(__dirname + "/../public/calendar.html"));
 });
 
