@@ -42,6 +42,7 @@ form.addEventListener("submit", e => {
 
   fetch(url, {
     method: "POST",
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"

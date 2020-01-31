@@ -25,6 +25,7 @@ initializePassport.initialize(passport, async id => {
 
 //routes
 const aliment = require("./routes/alimentRoutes");
+const calendar = require("./routes/calendarRoutes");
 
 //database
 const db = require("./config/database");
@@ -37,8 +38,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }
+    saveUninitialized: false
   })
 );
 app.use(passport.initialize());
@@ -50,7 +50,9 @@ db.authenticate()
   .then(() => console.log("Database connected.."))
   .catch(err => console.log("Error:" + err));
 
+//routes
 app.use("/", aliment);
+app.use("/", calendar);
 
 //listen to port
 app.listen(3000);

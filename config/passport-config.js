@@ -45,6 +45,8 @@ function checkAuthenticated(req, res, next) {
 
 //checks if user is auth redirects to home
 function checkNotAuthenticated(req, res, next) {
+  console.log(req.isAuthenticated(), "REQ IS AUTH@@@@");
+  console.log("TESTSSS#####", req.user);
   if (req.isAuthenticated()) {
     return res.redirect("/");
   }

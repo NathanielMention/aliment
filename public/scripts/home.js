@@ -45,7 +45,6 @@ const submitFood = e => {
 
       //go through foodlist array one by one to create list of food
       foodList.forEach(food => {
-        //
         const li = createnode("li");
         const itemName = food.fields.item_name;
         const calories = food.fields.nf_calories;
@@ -109,3 +108,18 @@ input.addEventListener("keyup", e => {
     submitFood(e);
   }
 });
+
+fetch("http://127.0.0.1:3000/logout", {
+  method: "DELETE",
+  credentials: "include",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json"
+  }
+})
+  .then(res => {
+    return res.json();
+  })
+  .then(() => {
+    window.location.href = "/login";
+  });

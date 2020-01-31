@@ -45,7 +45,6 @@ const submitFood = e => {
 
       //go through foodlist array one by one to create list of food
       foodList.forEach(food => {
-        //
         const li = createnode("li");
         const itemName = food.fields.item_name;
         const calories = food.fields.nf_calories;

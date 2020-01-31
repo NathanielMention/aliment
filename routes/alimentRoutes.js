@@ -10,16 +10,20 @@ const user = require("../models/alimentModels");
 const { body, check, validationResult } = require("express-validator");
 
 //access passport config auth
-const auth = require("../config/passport-config");
-const notAuth = require("../config/passport-config");
+const checkAuthenticated = require("../config/passport-config");
+const checkNotAuthenticated = require("../config/passport-config");
 
-router.get("/", auth.checkAuthenticated, (req, res) => {
+router.get("/", checkAuthenticated.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/index.html"));
 });
 
-router.get("/signup", notAuth.checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname + "/../public/signup.html"));
-});
+router.get(
+  "/signup",
+  checkNotAuthenticated.checkNotAuthenticated,
+  (req, res) => {
+    res.sendFile(path.join(__dirname + "/../public/signup.html"));
+  }
+);
 
 router.post(
   "/signup",
@@ -62,7 +66,7 @@ router.post(
       return true;
     })
   ],
-  notAuth.checkNotAuthenticated,
+  checkNotAuthenticated.checkNotAuthenticated,
   (req, res) => {
     const { username, password } = req.body;
 
@@ -84,9 +88,13 @@ router.post(
   }
 );
 
-router.get("/login", notAuth.checkNotAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname + "/../public/login.html"));
-});
+router.get(
+  "/login",
+  checkNotAuthenticated.checkNotAuthenticated,
+  (req, res) => {
+    res.sendFile(path.join(__dirname + "/../public/login.html"));
+  }
+);
 
 router.post(
   "/login",
@@ -114,14 +122,14 @@ router.post(
         return user
           .findOne({ where: { username: req.body.username } })
           .then(async user => {
-            if (!(await user.validPassword(value))) {
+            if (user && !(await user.validPassword(value))) {
               return Promise.reject("Password is incorrect");
             }
           });
       })
   ],
-  notAuth.checkNotAuthenticated,
-  passport.authenticate("local"),
+  checkNotAuthenticated.checkNotAuthenticated,
+  passport.authenticate("local", { session: true }),
   (req, res) => {
     //errors from login validation
     const loginErrors = validationResult(req);
@@ -135,13 +143,14 @@ router.post(
 );
 
 router.get("/home", (req, res) => {
-  console.log(req.isAuthenticated());
   res.sendFile(path.join(__dirname + "/../public/home.html"));
 });
 
 router.delete("/logout", (req, res) => {
+  console.log(req.user, "LOGOUT REQ USERRRRRR!!!!!!!!!");
   req.logOut();
   res.json({ success: true });
+  console.log("BACKENDTESTSSS");
 });
 
 module.exports = router;

@@ -30,6 +30,7 @@ form.addEventListener("submit", e => {
 
   fetch(url, {
     method: "POST",
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -38,8 +39,11 @@ form.addEventListener("submit", e => {
     body: JSON.stringify(data)
   })
     .then(res => {
-      console.log(res);
-      return res.json();
+      if (res.status === 401) {
+        return { loginErrors: [{ msg: "Username or Password is incorrect" }] };
+      } else {
+        return res.json();
+      }
     })
     .then(data => {
       if (data.loginErrors && data.loginErrors.length > 0) {
