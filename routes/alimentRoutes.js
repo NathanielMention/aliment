@@ -145,7 +145,6 @@ router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
 });
 
 router.delete("/logout", (req, res) => {
-  console.log("HEY THIS IS BEFORE LOGOUT!!");
   req.logOut();
   res.json({ success: true });
 });

@@ -37,7 +37,6 @@ function initialize(passport, getUserById) {
 
 //if user is not auth redirect them to login
 function checkAuthenticated(req, res, next) {
-  console.log(req.isAuthenticated(), "checkauthfunc");
   if (req.isAuthenticated()) {
     return next();
   }
@@ -47,7 +46,6 @@ function checkAuthenticated(req, res, next) {
 
 //checks if user is auth redirects to home
 function checkNotAuthenticated(req, res, next) {
-  console.log(req.isAuthenticated(), "checkNOTauthfunc");
   if (req.isAuthenticated()) {
     return res.redirect("/home");
   }

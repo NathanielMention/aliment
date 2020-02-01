@@ -1,4 +1,3 @@
-//dynamic month drop down
 const monthNames = [
   "January",
   "February",
@@ -13,7 +12,7 @@ const monthNames = [
   "November",
   "December"
 ];
-
+//dynamic month drop down
 const monthNum = new Date().getMonth();
 const month = monthNames[monthNum];
 let monthOptions = "<option value='' selected>Month</option>";
