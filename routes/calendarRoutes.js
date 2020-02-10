@@ -17,8 +17,12 @@ router.get("/calendar", (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/calendar.html"));
 });
 
-router.get("/userCalendar", (req, res) => {
-  res.sendFile(path.join(__dirname + "/../public/userCalendar.html"));
-});
+router.get(
+  "/userCalendar",
+  checkAuthenticated.checkAuthenticated,
+  (req, res) => {
+    res.sendFile(path.join(__dirname + "/../public/userCalendar.html"));
+  }
+);
 
 module.exports = router;

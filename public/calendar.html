@@ -27,17 +27,17 @@
       <div class="card">
         <form class="form-inline">
           <label>Jump To:</label>
-          <select id="month"
+          <select id="month" onchange="jump()"
             >Month</select
           >
-          <select id="year"
+          <select id="year" onchange="jump()"
             >Year</select
           >
         </form>
         <h3 class="card-header" id="monthAndYear"></h3>
         <div class="form-inline">
-          <button class="btn">Prev</button>
-          <button class="btn">Next</button>
+          <button class="btn" id="prev">Prev</button>
+          <button class="btn" id="next">Next</button>
         </div>
         <table class="table">
           <thead>
@@ -51,7 +51,7 @@
               <th>Sat</th>
             </tr>
           </thead>
-          <tbody class="calendar-body"></tbody>
+          <tbody id="calendar-body"></tbody>
         </table>
       </div>
     </div>
