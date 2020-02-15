@@ -2,11 +2,6 @@ const createnode = element => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
 
-//show current date for home page
-const alimentDate = new Date(Date.now()).toLocaleString().split(",")[0];
-const calenderDate = document.querySelector(".calenderDate");
-calenderDate.textContent = `${alimentDate}`;
-
 let calorieAmount = 0;
 
 const updateCalorieCount = () => {

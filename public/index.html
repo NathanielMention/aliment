@@ -12,9 +12,6 @@
           <a href="/">Home</a>
         </li>
         <li>
-          <a href="/calendar">Calendar</a>
-        </li>
-        <li>
           <a href="/login">Login</a>
         </li>
         <li>
@@ -22,10 +19,39 @@
         </li>
       </ul>
     </nav>
-
+    <div class="container">
+      <div class="card">
+        <form class="form-inline">
+          <label>Jump To:</label>
+          <select id="month" onchange="jump()"
+            >Month</select
+          >
+          <select id="year" onchange="jump()"
+            >Year</select
+          >
+        </form>
+        <h3 class="card-header" id="monthAndYear"></h3>
+        <div class="form-inline">
+          <button class="btn" id="prev">Prev</button>
+          <button class="btn" id="next">Next</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body"></tbody>
+        </table>
+      </div>
+    </div>
     <time class="calenderDate"></time>
-    <button value="Previous">Previous</button>
-    <button value="Next">Next</button>
 
     <form class="searchForm">
       <input
@@ -39,6 +65,7 @@
     <ul class="foodList"></ul>
     <ul class="userList"></ul>
     <div class="totalCalories"></div>
+    <script src="./scripts/calendar.js"></script>
     <script src="./scripts/aliment.js"></script>
   </body>
 </html>

@@ -25,7 +25,6 @@ initializePassport.initialize(passport, async id => {
 
 //routes
 const aliment = require("./routes/alimentRoutes");
-const calendar = require("./routes/calendarRoutes");
 
 //database
 const db = require("./config/database");
@@ -52,7 +51,6 @@ db.authenticate()
 
 //routes
 app.use("/", aliment);
-app.use("/", calendar);
 
 //listen to port
 app.listen(3000);

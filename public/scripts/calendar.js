@@ -4,6 +4,11 @@ let currentYear = today.getFullYear();
 let selectYear = document.getElementById("year");
 let selectMonth = document.getElementById("month");
 
+//show current date for home page
+const alimentDate = new Date(Date.now()).toLocaleString().split(",")[0];
+const calenderDate = document.querySelector(".calenderDate");
+calenderDate.textContent = `${alimentDate}`;
+
 let months = [
   "Jan",
   "Feb",
@@ -61,16 +66,20 @@ function showCalendar(month, year) {
 
     //creating individual cells, filing them up with data.
     for (let j = 0; j < 7; j++) {
-      if (i === 0 && j < firstDay) {
-        let cell = document.createElement("td");
-        let cellText = document.createTextNode("");
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-      } else if (date > daysInMonth) {
+      if (date > daysInMonth) {
         break;
+      }
+      const cell = document.createElement("td");
+      cell.addEventListener("click", e => {
+        calenderDate.textContent = `${currentMonth + 1}/${
+          cellText.textContent
+        }/${currentYear}`;
+      });
+      let cellText = document.createTextNode(date);
+      //empty cells before first day
+      if (i === 0 && j < firstDay) {
+        cellText = document.createTextNode("");
       } else {
-        let cell = document.createElement("td");
-        let cellText = document.createTextNode(date);
         if (
           date === today.getDate() &&
           year === today.getFullYear() &&
@@ -79,10 +88,10 @@ function showCalendar(month, year) {
           // highlight today's date
           cell.classList.add("bg-info");
         }
-        cell.appendChild(cellText);
-        row.appendChild(cell);
         date++;
       }
+      cell.appendChild(cellText);
+      row.appendChild(cell);
     }
     // appending each row into calendar body.
     tbl.appendChild(row);
