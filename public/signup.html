@@ -3,8 +3,11 @@
   <head>
     <title>Aliment Signup</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="./styles/signup.css" />
   </head>
   <body>
+    <header>
+      <a class="logo" href="/">Aliment.</a>
     <nav>
       <ul>
         <li>
@@ -18,17 +21,16 @@
         </li>
       </ul>
     </nav>
-    <div><ul class="error"></ul></div>
+  </header>
     <form class="signupForm" method="post" action="/signup">
-      <label for="username">Username</label>
+      <h1>Signup</h1>
+      <div><ul class="error"></ul></div>
       <input
         type="text"
         class="username"
         name="username"
         placeholder="Username"
       />
-
-      <label for="password">Password</label>
       <input
         type="text"
         class="password"
@@ -36,8 +38,6 @@
         placeholder="Create Password"
         required
       />
-
-      <label for="password">Confirm Password</label>
       <input
         type="text"
         class="confirmPassword"
@@ -45,7 +45,7 @@
         placeholder="Confirm Password"
         required
       />
-
+      
       <button type="submit" value="Signup">Signup</button>
     </form>
     <script src="./scripts/signup.js"></script>

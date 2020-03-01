@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #ffffff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 15px;
+  text-align: center;
+  padding: 30px 10%;
+  background-color: #fafafa;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+  color: #ffffff;
+  position: relative;
+  background-color: #15aefa;
+  border-radius: 24px;
+}
+
+form div ul {
+  color: #f00606;
+  padding-left: 10px;
+}
+
+.logo {
+  margin-right: 60px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+
+.logo:hover {
+  color: #15aefa;
+}
+
+li,
+a {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #555555;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+nav li {
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+nav li a {
+  transition: all 0.3s ease 0s;
+}
+
+nav li a:hover {
+  color: #15aefa;
+}
+
+.loginForm {
+  width: 350px;
+  height: 350px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 24px;
+}
+
+.loginForm input[type="text"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #e3e3e3;
+  padding: 14px 10px;
+  width: 280px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.loginForm input[type="text"]:focus {
+  border-color: #15aefa;
+}
+
+form button {
+  border: 0;
+  background: #15aefa;
+  color: #ffffff;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #15aefa;
+  padding: 14px 10px;
+  width: 260px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+form button:hover {
+  background: #0192da;
+}

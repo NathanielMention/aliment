@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const session = require("express-session");
-const users = require("./models/alimentModels");
+const users = require("./models/user");
 
 //overides post method so we can use app.delete
 const methodOverride = require("method-override");
@@ -51,6 +51,10 @@ db.authenticate()
 
 //routes
 app.use("/", aliment);
+
+db.sync({ force: true }).then(() => {
+  console.log("synced database");
+});
 
 //listen to port
 app.listen(3000);

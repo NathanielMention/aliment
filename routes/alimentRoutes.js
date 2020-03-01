@@ -4,7 +4,7 @@ const path = require("path");
 const passport = require("passport");
 
 //users
-const user = require("../models/alimentModels");
+const users = require("../models/user");
 
 //express-validator
 const { body, check, validationResult } = require("express-validator");
@@ -39,10 +39,10 @@ router.post(
       .isAlphanumeric()
       .withMessage("Username must have letters or numbers and no spaces")
       .custom((value, { req }) => {
-        return user
+        return users
           .findOne({ where: { username: req.body.username } })
-          .then(user => {
-            if (user) {
+          .then(users => {
+            if (users) {
               return Promise.reject("Username already exists");
             }
           });
@@ -75,7 +75,7 @@ router.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
-    user
+    users
       .create({
         username,
         password
@@ -83,7 +83,7 @@ router.post(
       .then(() => {
         res.json({ success: true });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err, "this is a errotz1111"));
   }
 );
 
@@ -104,10 +104,10 @@ router.post(
       .isEmpty()
       .withMessage("Username is required")
       .custom((value, { req }) => {
-        return user
+        return users
           .findOne({ where: { username: req.body.username } })
-          .then(user => {
-            if (!user) {
+          .then(users => {
+            if (!users) {
               return Promise.reject("Username does not exists");
             }
           });
@@ -118,10 +118,10 @@ router.post(
       .isEmpty()
       .withMessage("Password is required")
       .custom((value, { req }) => {
-        return user
+        return users
           .findOne({ where: { username: req.body.username } })
-          .then(async user => {
-            if (user && !(await user.validPassword(value))) {
+          .then(async users => {
+            if (users && !(await users.validPassword(value))) {
               return Promise.reject("Password is incorrect");
             }
           });
