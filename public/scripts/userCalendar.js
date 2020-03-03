@@ -65,7 +65,11 @@ function showCalendar(month, year) {
         break;
       }
       const cell = document.createElement("td");
-      cell.addEventListener("click", e => {});
+      cell.addEventListener("click", e => {
+        calenderDate.textContent = `${currentMonth + 1}/${
+          cellText.textContent
+        }/${currentYear}`;
+      });
       let cellText = document.createTextNode(date);
       if (i === 0 && j < firstDay) {
         cellText = document.createTextNode("");
@@ -76,7 +80,7 @@ function showCalendar(month, year) {
           month === today.getMonth()
         ) {
           // highlight today's date
-          cell.classList.add("bg-info");
+          cell.classList.add("todaysDate");
         }
         date++;
       }

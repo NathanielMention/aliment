@@ -51,7 +51,7 @@ db.authenticate()
 
 //routes
 app.use("/", aliment);
-
+console.log(db);
 db.sync({ force: true }).then(() => {
   console.log("synced database");
 });

@@ -3,22 +3,25 @@
   <head>
     <title>Aliment</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="./styles/index.css" />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/login">Login</a>
-        </li>
-        <li>
-          <a href="/signup">SignUp</a>
-        </li>
-      </ul>
-    </nav>
+    <header>
+      <a class="logo" href="/">Aliment.</a>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+          <li>
+            <a href="/signup">SignUp</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <div class="container">
       <div class="card">
         <form class="form-inline">
@@ -30,10 +33,10 @@
             >Year</select
           >
         </form>
-        <h3 class="card-header" id="monthAndYear"></h3>
-        <div class="form-inline">
-          <button class="btn" id="prev">Prev</button>
-          <button class="btn" id="next">Next</button>
+        <div>
+          <button class="btn" id="prev">&#8249;</button>
+          <h3 class="card-header" id="monthAndYear"></h3>
+          <button class="btn" id="next">&#8250;</button>
         </div>
         <table class="table">
           <thead>
@@ -51,20 +54,25 @@
         </table>
       </div>
     </div>
-    <time class="calenderDate"></time>
-
-    <form class="searchForm">
-      <input
-        type="text"
-        class="searchFood"
-        name="searchFood"
-        placeholder="Search Food"
-      />
-      <button id="submit">Submit</button>
-    </form>
-    <ul class="foodList"></ul>
-    <ul class="userList"></ul>
-    <div class="totalCalories"></div>
+    <div class="listContainer">
+      <time class="calenderDate"></time>
+      <form class="searchForm">
+        <input
+          type="text"
+          class="searchFood"
+          name="searchFood"
+          placeholder="Search Food"
+        />
+        <button id="submit">Submit</button>
+      </form>
+      <ul class="foodList">
+        Food List
+      </ul>
+      <ul class="userList">
+        Food Intake
+      </ul>
+      <div class="totalCalories"></div>
+    </div>
     <script src="./scripts/calendar.js"></script>
     <script src="./scripts/aliment.js"></script>
   </body>

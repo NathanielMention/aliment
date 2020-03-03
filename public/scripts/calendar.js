@@ -86,7 +86,7 @@ function showCalendar(month, year) {
           month === today.getMonth()
         ) {
           // highlight today's date
-          cell.classList.add("bg-info");
+          cell.classList.add("todaysDate");
         }
         date++;
       }

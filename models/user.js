@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../config/database");
 //bcrypt
 const bcrypt = require("bcrypt");
-
+console.log(db, "userdb!!!!!!");
 const users = db.define("users", {
   id: {
     type: DataTypes.INTEGER,
