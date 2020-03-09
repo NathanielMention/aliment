@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Dates", {
+    return queryInterface.createTable("calendar", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         references: {
-          model: "dates",
+          model: "users",
           key: "id"
         },
         allowNull: false
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Dates");
+    return queryInterface.dropTable("calendar");
   }
 };

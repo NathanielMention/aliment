@@ -1,9 +1,8 @@
 const LocalStrategy = require("passport-local").Strategy;
-const user = require("../models/user");
-
+const { users } = require("./database");
 function initialize(passport, getUserById) {
   const authenticateUser = async (username, password, done) => {
-    user.findOne({ where: { username } }).then(async user => {
+    users.findOne({ where: { username } }).then(async user => {
       if (!user) {
         return done(null, false);
       }
@@ -19,7 +18,6 @@ function initialize(passport, getUserById) {
       }
     });
   };
-
   passport.use(
     new LocalStrategy(
       { usernameField: "username", passwordField: "password" },
@@ -34,16 +32,13 @@ function initialize(passport, getUserById) {
     return done(null, await getUserById(id));
   });
 }
-
 //if user is not auth redirect them to login
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-
   res.redirect("/login");
 }
-
 //checks if user is auth redirects to home
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -51,7 +46,6 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
-
 module.exports = {
   initialize: initialize,
   checkAuthenticated: checkAuthenticated,

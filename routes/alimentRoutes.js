@@ -4,7 +4,7 @@ const path = require("path");
 const passport = require("passport");
 
 //users
-const users = require("../models/user");
+const { users } = require("../config/database");
 
 //express-validator
 const { body, check, validationResult } = require("express-validator");
@@ -45,9 +45,9 @@ router.post(
             if (users) {
               return Promise.reject("Username already exists");
             }
-          });
+          })
+          .catch(err => console.log(err, "err insidehjghjb"));
       }),
-
     check("password")
       .not()
       .isEmpty()
@@ -56,25 +56,21 @@ router.post(
       .withMessage("Password must be at least 6 characters")
       .matches(/\d/)
       .withMessage("Password must have at least 1 number"),
-
     check("confirmPassword").custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Password confirmation does not match password");
       }
-
       // Indicates the success of this synchronous custom validator
       return true;
     })
   ],
   (req, res) => {
     const { username, password } = req.body;
-
     //errors from sign up validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
     users
       .create({
         username,
@@ -82,8 +78,7 @@ router.post(
       })
       .then(() => {
         res.json({ success: true });
-      })
-      .catch(err => console.log(err, "this is a errotz1111"));
+      });
   }
 );
 
@@ -112,7 +107,6 @@ router.post(
             }
           });
       }),
-
     check("password")
       .not()
       .isEmpty()
@@ -131,7 +125,6 @@ router.post(
   (req, res) => {
     //errors from login validation
     const loginErrors = validationResult(req);
-
     if (!loginErrors.isEmpty()) {
       return res.status(422).json({ loginErrors: loginErrors.array() });
     } else {

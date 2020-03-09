@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const session = require("express-session");
-const users = require("./models/user");
+const { users } = require("./config/database");
 
 //overides post method so we can use app.delete
 const methodOverride = require("method-override");
@@ -27,12 +27,11 @@ initializePassport.initialize(passport, async id => {
 const aliment = require("./routes/alimentRoutes");
 
 //database
-const db = require("./config/database");
+const { db } = require("./config/database");
 
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -44,15 +43,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+//routes
+app.use("/", aliment);
+
 //test DB
 db.authenticate()
   .then(() => console.log("Database connected.."))
   .catch(err => console.log("Error:" + err));
-
-//routes
-app.use("/", aliment);
-console.log(db);
-db.sync({ force: true }).then(() => {
+db.sync().then(() => {
   console.log("synced database");
 });
 

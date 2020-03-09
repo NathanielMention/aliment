@@ -48,6 +48,24 @@ nav li a:hover {
   color: #15aefa;
 }
 
+.btn {
+  border: 0;
+  background: #15aefa;
+  color: #ffffff;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #15aefa;
+  width: 25px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+  transition-duration: 0.4s;
+}
+
+.btn:hover {
+  background: #0192da;
+}
+
 .container {
   align-items: center;
   display: flex;
