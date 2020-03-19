@@ -3,8 +3,8 @@ const router = express.Router();
 const path = require("path");
 const passport = require("passport");
 
-//users
-const { users } = require("../config/database");
+//users, calendar
+const { users, calendar } = require("../config/database");
 
 //express-validator
 const { body, check, validationResult } = require("express-validator");
@@ -46,7 +46,7 @@ router.post(
               return Promise.reject("Username already exists");
             }
           })
-          .catch(err => console.log(err, "err insidehjghjb"));
+          .catch(err => console.log(err));
       }),
     check("password")
       .not()
@@ -135,6 +135,23 @@ router.post(
 
 router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/home.html"));
+});
+
+router.post("/home", (req, res) => {
+  const { date, calories, food } = req.body;
+  const userId = req.user.id;
+  calendar
+    .create({
+      id,
+      date,
+      calories,
+      food,
+      userId
+    })
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch(err => console.log(err));
 });
 
 router.delete("/logout", (req, res) => {

@@ -127,3 +127,36 @@ logOut.addEventListener("submit", e => {
       window.location.href = "/login";
     });
 });
+
+/*const data = {
+  date: calenderDate.textContent,
+  calories: calorieAmount.textContent,
+  food: userUl 
+}; */
+
+const data = {
+  date: "3/3/20",
+  calories: 101,
+  food: "pears"
+};
+
+const saveBtn = document.getElementById(".saveBtn");
+
+saveBtn.addEventListener("submit", e => {
+  fetch("http://127.0.0.1:3000/home", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    //make sure to serialize your JSON body
+    body: JSON.stringify(data)
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+    });
+});

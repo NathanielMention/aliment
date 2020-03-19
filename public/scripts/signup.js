@@ -52,7 +52,7 @@ form.addEventListener("submit", e => {
   })
     .then(res => res.json())
     .then(data => {
-      if (data.errors) {
+      if (data.errors && data.errors.length > 0) {
         data.errors.forEach(
           err => (errorElement.innerHTML += `<li>${err.msg}</li>`)
         );

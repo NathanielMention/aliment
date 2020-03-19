@@ -5,6 +5,10 @@ body {
   background: #ffffff;
 }
 
+/*
+  Nav Css
+*/
+
 header {
   display: flex;
   justify-content: space-between;
@@ -13,18 +17,6 @@ header {
   padding: 30px 10%;
   background-color: #fafafa;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-h1 {
-  color: #ffffff;
-  position: relative;
-  background-color: #15aefa;
-  border-radius: 24px;
-}
-
-form div ul {
-  color: #f00606;
-  padding-left: 10px;
 }
 
 .logo {
@@ -37,7 +29,7 @@ form div ul {
   color: #15aefa;
 }
 
-li,
+nav,
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -60,9 +52,17 @@ nav li a:hover {
   color: #15aefa;
 }
 
+/*
+  Login Form Css
+*/
+
+h1 {
+  color: #b5b5b5;
+  position: relative;
+}
+
 .loginForm {
   width: 350px;
-  height: 350px;
   padding: 40px;
   position: absolute;
   top: 50%;
@@ -109,4 +109,10 @@ form button {
 
 form button:hover {
   background: #0192da;
+}
+
+.error {
+  color: #f00606;
+  list-style-type: none;
+  padding-left: 10px;
 }

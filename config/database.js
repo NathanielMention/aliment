@@ -45,7 +45,7 @@ const calendar = db.define("calendar", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: false,
+    autoIncrement: true,
     allowNull: false
   },
   date: {

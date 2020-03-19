@@ -5,6 +5,10 @@ body {
   background: #ffffff;
 }
 
+/*
+  Nav Css
+*/
+
 header {
   display: flex;
   justify-content: space-between;
@@ -25,7 +29,7 @@ header {
   color: #15aefa;
 }
 
-li,
+nav,
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -48,6 +52,22 @@ nav li a:hover {
   color: #15aefa;
 }
 
+/*
+  Calendar css
+*/
+
+.jumpForm {
+  color: #555555;
+}
+
+h3 {
+  color: #aeaeae;
+}
+
+#monthBtn {
+  display: flex;
+}
+
 .btn {
   border: 0;
   background: #15aefa;
@@ -66,14 +86,54 @@ nav li a:hover {
   background: #0192da;
 }
 
+time {
+  color: #555555;
+}
+
+.searchForm input[type="text"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #e3e3e3;
+  padding: 10px 8px;
+  width: 85%;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.searchForm input[type="text"]:focus {
+  border-color: #15aefa;
+}
+
+.foodBtn {
+  border: 0;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  padding: 6px 8px;
+  background: #15aefa;
+  color: #ffffff;
+  border: 2px solid #15aefa;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+  transition-duration: 0.4s;
+  width: 100%;
+}
+
+.foodBtn:hover {
+  background: #0192da;
+}
+
 .container {
   align-items: center;
   display: flex;
-  height: 100%;
   justify-content: center;
+  width: 50%;
   margin: 0 auto;
-  max-width: 600px;
-  width: 100%;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
