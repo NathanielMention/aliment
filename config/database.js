@@ -49,10 +49,12 @@ const calendar = db.define("calendar", {
     allowNull: false
   },
   date: {
-    type: DataTypes.DATEONLY
+    type: DataTypes.DATEONLY,
+    unique: "compoundKey"
   },
   userId: {
     type: DataTypes.INTEGER,
+    unique: "compoundKey",
     onDelete: "CASCADE",
     allowNull: false
   },
@@ -60,7 +62,7 @@ const calendar = db.define("calendar", {
     type: DataTypes.INTEGER
   },
   food: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING(9999)
   }
 });
 

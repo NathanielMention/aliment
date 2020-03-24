@@ -142,7 +142,6 @@ router.post("/home", (req, res) => {
   const userId = req.user.id;
   calendar
     .create({
-      id,
       date,
       calories,
       food,
@@ -152,6 +151,10 @@ router.post("/home", (req, res) => {
       res.json({ success: true });
     })
     .catch(err => console.log(err));
+});
+
+router.get("/intake", checkAuthenticated.checkAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname + "/../public/home.html"));
 });
 
 router.delete("/logout", (req, res) => {

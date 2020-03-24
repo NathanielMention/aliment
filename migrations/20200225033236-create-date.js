@@ -9,10 +9,12 @@ module.exports = {
         allowNull: false
       },
       date: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATEONLY,
+        unique: "compoundKey"
       },
       userId: {
         type: Sequelize.INTEGER,
+        unique: "compoundKey",
         onDelete: "CASCADE",
         references: {
           model: "users",
@@ -24,7 +26,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       food: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(9999)
       },
       createdAt: {
         allowNull: false,

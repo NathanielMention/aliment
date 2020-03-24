@@ -35,8 +35,24 @@ a {
   font-weight: 500;
   font-size: 16px;
   color: #555555;
+  background-color: #fafafa;
   text-decoration: none;
   list-style-type: none;
+}
+
+.logoutBtn {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  outline: none;
+  border: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #555555;
+}
+
+.logoutBtn:hover {
+  color: #15aefa;
 }
 
 nav li {
@@ -84,6 +100,22 @@ h3 {
 
 .btn:hover {
   background: #0192da;
+}
+
+table {
+  color: #555555;
+}
+
+td:hover {
+  border: 0;
+  background: #15aefa;
+  color: #ffffff;
+  opacity: 0.5;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  transition: 0.25s;
+  transition-duration: 0.4s;
 }
 
 time {
@@ -142,7 +174,12 @@ time {
 }
 
 .todaysDate {
-  color: #15aefa;
+  border: 0;
+  background: #15aefa;
+  color: #ffffff;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
 }
 
 .listContainer {
@@ -152,7 +189,37 @@ time {
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
-  width: 100%;
+  width: 33%;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 24px;
+}
+
+.searchContainer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 33%;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  border-radius: 24px;
+}
+
+.calorieContainer {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 33%;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

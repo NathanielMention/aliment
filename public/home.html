@@ -19,7 +19,7 @@
             action="/logout?_method=DELETE"
             method="POST"
           >
-            <button type="submit">Logout</button>
+            <button class="logoutBtn" type="submit">Logout</button>
           </form>
         </li>
         <li>
@@ -60,7 +60,7 @@
         </table>
       </div>
     </div>
-    <div class="listContainer">
+    <div class="searchContainer">
       <time class="calenderDate"></time>
       <form class="searchForm">
         <input
@@ -71,12 +71,16 @@
         />
         <button class="foodBtn" id="submit">Submit</button>
       </form>
+    </div>  
+    <div class="listContainer">  
       <ul class="foodList">
         Food List
       </ul>
       <ul class="userList">
         Food Intake
       </ul>
+    </div>  
+    <div class="calorieContainer">
       <div class="totalCalories">Calories</div>
       <button class="foodBtn" id="saveBtn">Save</button>
     </div>

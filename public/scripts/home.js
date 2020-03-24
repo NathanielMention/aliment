@@ -128,21 +128,16 @@ logOut.addEventListener("submit", e => {
     });
 });
 
-/*const data = {
-  date: calenderDate.textContent,
-  calories: calorieAmount.textContent,
-  food: userUl 
-}; */
+const saveBtn = document.getElementById("saveBtn");
 
-const data = {
-  date: "3/3/20",
-  calories: 101,
-  food: "pears"
-};
+saveBtn.addEventListener("click", e => {
+  const userUl = document.querySelector(".userList");
+  const data = {
+    date: calenderDate.textContent,
+    calories: calorieAmount,
+    food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim()
+  };
 
-const saveBtn = document.getElementById(".saveBtn");
-
-saveBtn.addEventListener("submit", e => {
   fetch("http://127.0.0.1:3000/home", {
     method: "POST",
     credentials: "include",
