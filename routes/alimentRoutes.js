@@ -45,8 +45,8 @@ router.post(
             if (users) {
               return Promise.reject("Username already exists");
             }
-          })
-          .catch(err => console.log(err));
+            return true;
+          });
       }),
     check("password")
       .not()
@@ -58,7 +58,7 @@ router.post(
       .withMessage("Password must have at least 1 number"),
     check("confirmPassword").custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error("Password confirmation does not match password");
+        return Promise.reject("Password confirmation does not match password");
       }
       // Indicates the success of this synchronous custom validator
       return true;
@@ -105,6 +105,7 @@ router.post(
             if (!users) {
               return Promise.reject("Username does not exists");
             }
+            return true;
           });
       }),
     check("password")
@@ -118,6 +119,7 @@ router.post(
             if (users && !(await users.validPassword(value))) {
               return Promise.reject("Password is incorrect");
             }
+            return true;
           });
       })
   ],

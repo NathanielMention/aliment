@@ -68,6 +68,22 @@ h3 {
   display: flex;
 }
 
+select {
+  border: 0;
+  background: none;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #e3e3e3;
+  padding: 10px 8px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+select:hover {
+  border: 2px solid #0192da;
+}
+
 .btn {
   border: 0;
   background: #15aefa;
@@ -88,18 +104,27 @@ h3 {
 
 table {
   color: #555555;
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+
+th {
+  border: 1px solid #999;
+}
+
+td {
+  border: 1px solid #999;
+  height: 4em;
+  width: 4em;
 }
 
 td:hover {
-  border: 0;
   background: #15aefa;
   color: #ffffff;
   opacity: 0.5;
   border-radius: 50%;
   height: 28px;
   width: 28px;
-  transition: 0.25s;
-  transition-duration: 0.4s;
 }
 
 time {
@@ -148,8 +173,8 @@ time {
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 50%;
-  margin: 0 auto;
+  width: 33%;
+  margin: 6% auto;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -158,7 +183,6 @@ time {
 }
 
 .todaysDate {
-  border: 0;
   background: #15aefa;
   color: #ffffff;
   border-radius: 50%;
@@ -168,14 +192,15 @@ time {
 
 .listContainer {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   height: 100%;
   justify-content: center;
-  margin: 0 auto;
+  margin-left: 10%;
   max-width: 600px;
-  width: 33%;
+  width: 45%;
   padding: 40px;
   background: #ffffff;
+  color: #555555;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   border-radius: 24px;
@@ -183,12 +208,12 @@ time {
 
 .searchContainer {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   height: 100%;
   justify-content: center;
-  margin: 0 auto;
+  margin-left: 3%;
   max-width: 600px;
-  width: 33%;
+  width: 25%;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -198,15 +223,50 @@ time {
 
 .calorieContainer {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   height: 100%;
   justify-content: center;
-  margin: 0 auto;
+  margin-left: 53%;
+  margin-top: 3%;
+  margin-bottom: 20%;
   max-width: 600px;
-  width: 33%;
+  width: 25%;
   padding: 40px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   border-radius: 24px;
+  color: #555555;
+}
+
+span {
+  text-decoration: underline;
+}
+
+.foodList li {
+  list-style: none;
+  padding: 2%;
+}
+
+.foodList li:hover {
+  border: 0;
+  background: #15aefa;
+  color: #ffffff;
+  border: 2px solid #15aefa;
+  outline: none;
+  border-radius: 10px;
+}
+
+.userList li {
+  list-style: none;
+  padding: 2%;
+}
+
+.userList li:hover {
+  border: 0;
+  background: #fe6060;
+  color: #ffffff;
+  border: 2px solid #fe6060;
+  outline: none;
+  border-radius: 10px;
 }
