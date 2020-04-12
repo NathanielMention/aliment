@@ -7,6 +7,8 @@ const alimentDate = new Date(Date.now()).toLocaleString().split(",")[0];
 const calenderDate = document.querySelector(".calenderDate");
 calenderDate.textContent = `${alimentDate}`;
 
+//check if food request is submitted
+let isGettingFood = false;
 let calorieAmount = 0;
 
 const updateCalorieCount = () => {
@@ -26,6 +28,10 @@ const decrementCalories = target => {
 
 const submitFood = e => {
   e.preventDefault();
+  if (isGettingFood) {
+    return;
+  }
+  isGettingFood = true;
 
   const foodInputValue = document.querySelector(".searchFood").value;
   const ul = document.querySelector(".foodList");
@@ -42,6 +48,7 @@ const submitFood = e => {
     .then(response => response.json())
     .then(data => {
       const foodList = data.hits;
+      isGettingFood = false;
 
       //go through foodlist array one by one to create list of food
       foodList.forEach(food => {

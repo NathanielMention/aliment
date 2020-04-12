@@ -1,7 +1,8 @@
 const createnode = element => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
-
+//check if food request is submitted
+let isGettingFood = false;
 let calorieAmount = 0;
 
 const updateCalorieCount = () => {
@@ -21,6 +22,10 @@ const decrementCalories = target => {
 
 const submitFood = e => {
   e.preventDefault();
+  if (isGettingFood) {
+    return;
+  }
+  isGettingFood = true;
 
   const foodInputValue = document.querySelector(".searchFood").value;
   const ul = document.querySelector(".foodList");
@@ -37,9 +42,10 @@ const submitFood = e => {
     .then(response => response.json())
     .then(data => {
       const foodList = data.hits;
+      isGettingFood = false;
 
       //go through foodlist array one by one to create list of food
-      foodList.forEach(food => {
+      foodList.forEach((food, index) => {
         const li = createnode("li");
         const itemName = food.fields.item_name;
         const calories = food.fields.nf_calories;
@@ -57,6 +63,7 @@ const submitFood = e => {
         const userUl = document.querySelector(".userList");
         const target = e.target;
         if (target.matches("li")) {
+          isGettingFood = false;
           const userLi = createnode("li");
           userLi.textContent = target.textContent;
           append(userUl, userLi);

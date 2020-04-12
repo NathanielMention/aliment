@@ -4,7 +4,7 @@ const path = require("path");
 const passport = require("passport");
 
 //users, calendar
-const { users, calendar } = require("../config/database");
+const { users, calendar, nutrition } = require("../config/database");
 
 //express-validator
 const { body, check, validationResult } = require("express-validator");
@@ -142,16 +142,20 @@ router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
 router.post("/home", (req, res) => {
   const { date, calories, food } = req.body;
   const userId = req.user.id;
-  calendar
+  nutrition
     .create({
-      date,
       calories,
-      food,
-      userId
+      food
     })
-    .then(() => {
-      res.json({ success: true });
+    .then(data => {
+      const nutritionId = data.id;
+      return calendar.create({
+        date,
+        userId,
+        nutritionId
+      });
     })
+    .then(() => res.json({ success: true }))
     .catch(err => console.log(err));
 });
 

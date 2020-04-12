@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const db = new Sequelize("alimentdb", "nathanielmention", "9x9yu18xu0p", {
   host: "localhost",
   dialect: "postgres",
+  logging: false,
   pool: {
     max: 5,
     min: 0,
@@ -42,20 +43,40 @@ users.prototype.validPassword = async function(password) {
 };
 
 const calendar = db.define("calendar", {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
-  },
   date: {
     type: DataTypes.DATEONLY,
+    primaryKey: true,
     unique: "compoundKey"
   },
   userId: {
     type: DataTypes.INTEGER,
+    references: {
+      model: "users",
+      key: "userId"
+    },
     unique: "compoundKey",
     onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+    allowNull: false
+  },
+  nutritionId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "nutrition",
+      key: "nutritionId"
+    },
+    unique: "compoundKey",
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+    allowNull: false
+  }
+});
+
+const nutrition = db.define("nutrition", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
     allowNull: false
   },
   calories: {
@@ -66,11 +87,21 @@ const calendar = db.define("calendar", {
   }
 });
 
-users.hasMany(calendar);
 calendar.belongsTo(users, { foreignKey: "userId" });
+calendar.belongsTo(nutrition, { foreignKey: "nutritionId" });
+
+users.belongsToMany(nutrition, { through: calendar, foreignKey: "userId" });
+
+nutrition.belongsToMany(users, {
+  through: calendar,
+  foreignKey: "nutritionId"
+});
+//users.hasMany(calendar);
+//calendar.belongsTo(users, { foreignKey: "userId" });
 
 module.exports = {
   db,
   users,
-  calendar
+  calendar,
+  nutrition
 };

@@ -2,39 +2,32 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("calendar", {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: false,
-        allowNull: false
-      },
       date: {
-        type: Sequelize.DATEONLY,
+        type: DataTypes.DATEONLY,
+        primaryKey: true,
         unique: "compoundKey"
       },
       userId: {
-        type: Sequelize.INTEGER,
-        unique: "compoundKey",
-        onDelete: "CASCADE",
+        type: DataTypes.INTEGER,
         references: {
           model: "users",
-          key: "id"
+          key: "userId"
         },
+        unique: "compoundKey",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         allowNull: false
       },
-      calories: {
-        type: Sequelize.INTEGER
-      },
-      food: {
-        type: Sequelize.STRING(9999)
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      nutritionId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "nutrition",
+          key: "nutritionId"
+        },
+        unique: "compoundKey",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        allowNull: false
       }
     });
   },
