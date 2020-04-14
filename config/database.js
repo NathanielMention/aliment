@@ -1,18 +1,24 @@
 const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
+const config = require("./config");
 
-const db = new Sequelize("alimentdb", "nathanielmention", "9x9yu18xu0p", {
-  host: "localhost",
-  dialect: "postgres",
-  logging: false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
+const db = new Sequelize(
+  config.production.database,
+  config.production.username,
+  config.production.password,
+  {
+    host: "localhost",
+    dialect: "postgres",
+    logging: false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   }
-});
+);
 
 const users = db.define("users", {
   id: {

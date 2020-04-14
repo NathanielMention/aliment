@@ -5,6 +5,29 @@ const remove = (parent, el) => parent.removeChild(el);
 let isGettingFood = false;
 let calorieAmount = 0;
 
+//use event delgation to make foodlist clickable
+document.querySelector(".foodList").addEventListener("click", e => {
+  const userUl = document.querySelector(".userList");
+  const target = e.target;
+  if (target.matches("li")) {
+    const userLi = createnode("li");
+    userLi.textContent = target.textContent;
+    append(userUl, userLi);
+
+    incrementCalories(target);
+
+    //make userUL clickable and <li> removable
+    userLi.addEventListener("click", e => {
+      if (target.matches("li")) {
+        remove(userUl, userLi);
+        decrementCalories(target);
+      }
+
+      updateCalorieCount(target);
+    });
+  }
+});
+
 const updateCalorieCount = () => {
   let totalCalories = document.querySelector(".totalCalories");
   totalCalories.textContent = `Calories: ${calorieAmount}`;
@@ -45,7 +68,7 @@ const submitFood = e => {
       isGettingFood = false;
 
       //go through foodlist array one by one to create list of food
-      foodList.forEach((food, index) => {
+      foodList.forEach(food => {
         const li = createnode("li");
         const itemName = food.fields.item_name;
         const calories = food.fields.nf_calories;
@@ -56,30 +79,6 @@ const submitFood = e => {
         li.dataset.calories = calories;
         li.textContent = `${itemName} ${calories} calories ${servingSize} ${units}`;
         append(ul, li);
-      });
-
-      //use event delgation to make foodlist clickable
-      ul.addEventListener("click", e => {
-        const userUl = document.querySelector(".userList");
-        const target = e.target;
-        if (target.matches("li")) {
-          isGettingFood = false;
-          const userLi = createnode("li");
-          userLi.textContent = target.textContent;
-          append(userUl, userLi);
-
-          incrementCalories(target);
-
-          //make userUL clickable and <li> removable
-          userLi.addEventListener("click", e => {
-            if (target.matches("li")) {
-              remove(userUl, userLi);
-              decrementCalories(target);
-            }
-
-            updateCalorieCount(target);
-          });
-        }
       });
     })
     .catch(error => console.log(error));

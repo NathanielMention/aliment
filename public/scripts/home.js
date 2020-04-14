@@ -2,6 +2,29 @@ const createnode = element => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
 
+//use event delgation to make foodlist clickable
+document.querySelector(".foodList").addEventListener("click", e => {
+  const userUl = document.querySelector(".userList");
+  const target = e.target;
+  if (target.matches("li")) {
+    const userLi = createnode("li");
+    userLi.textContent = target.textContent;
+    append(userUl, userLi);
+
+    incrementCalories(target);
+
+    //make userUL clickable and <li> removable
+    userLi.addEventListener("click", e => {
+      if (target.matches("li")) {
+        remove(userUl, userLi);
+        decrementCalories(target);
+      }
+
+      updateCalorieCount(target);
+    });
+  }
+});
+
 //show current date for home page
 const alimentDate = new Date(Date.now()).toLocaleString().split(",")[0];
 const calenderDate = document.querySelector(".calenderDate");
@@ -62,29 +85,6 @@ const submitFood = e => {
         li.dataset.calories = calories;
         li.textContent = `${itemName} ${calories} calories ${servingSize} ${units}`;
         append(ul, li);
-      });
-
-      //use event delgation to make foodlist clickable
-      ul.addEventListener("click", e => {
-        const userUl = document.querySelector(".userList");
-        const target = e.target;
-        if (target.matches("li")) {
-          const userLi = createnode("li");
-          userLi.textContent = target.textContent;
-          append(userUl, userLi);
-
-          incrementCalories(target);
-
-          //make userUL clickable and <li> removable
-          userLi.addEventListener("click", e => {
-            if (target.matches("li")) {
-              remove(userUl, userLi);
-              decrementCalories(target);
-            }
-
-            updateCalorieCount(target);
-          });
-        }
       });
     })
     .catch(error => console.log(error));
