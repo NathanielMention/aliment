@@ -2,8 +2,14 @@ const username = document.querySelector(".username");
 const password = document.querySelector(".password");
 const form = document.querySelector(".loginForm");
 const errorElement = document.querySelector(".error");
+const toggleButton = document.getElementsByClassName("toggle-button")[0];
+const navLinks = document.getElementsByClassName("navLinks")[0];
 
-form.addEventListener("submit", e => {
+toggleButton.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   //client side form validation
@@ -25,7 +31,7 @@ form.addEventListener("submit", e => {
 
   const data = {
     username: username.value,
-    password: password.value
+    password: password.value,
   };
 
   fetch(url, {
@@ -33,26 +39,26 @@ form.addEventListener("submit", e => {
     credentials: "include",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     //make sure to serialize your JSON body
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(res => {
+    .then((res) => {
       if (res.status === 401) {
         return { loginErrors: [{ msg: "Username or Password is incorrect" }] };
       } else {
         return res.json();
       }
     })
-    .then(data => {
+    .then((data) => {
       if (data.loginErrors && data.loginErrors.length > 0) {
         data.loginErrors.forEach(
-          err => (errorElement.innerHTML += `<li>${err.msg}</li>`)
+          (err) => (errorElement.innerHTML += `<li>${err.msg}</li>`)
         );
       } else {
         window.location.href = "/home";
       }
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 });

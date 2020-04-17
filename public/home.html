@@ -3,31 +3,37 @@
   <head>
     <title>Aliment</title>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/home.css" />
   </head>
   <body>
-    <header>
-      <a class="logo" href="/home">Aliment.</a>
-    <nav>
-      <ul>
-        <li>
-          <a href="/home">Home</a>
-        </li>
-        <li>
-          <form
+    <header class="navbar">
+      <a class="logo" href="/">Aliment.</a>
+      <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </a>
+      <nav class="navLinks">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <form
             class="logOutButton"
             action="/logout?_method=DELETE"
             method="POST"
-          >
+            >
             <button class="logoutBtn" type="submit">Logout</button>
           </form>
-        </li>
-        <li>
-          <a href="/signup">Sign Up</a>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <a href="/signup">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
     </header>
-    </nav>
     <div class="container">
       <div class="card">
         <form class="jumpForm">

@@ -3,8 +3,14 @@ const password = document.querySelector(".password");
 const confirmPassword = document.querySelector(".confirmPassword");
 const form = document.querySelector(".signupForm");
 const errorElement = document.querySelector(".error");
+const toggleButton = document.getElementsByClassName("toggle-button")[0];
+const navLinks = document.getElementsByClassName("navLinks")[0];
 
-form.addEventListener("submit", e => {
+toggleButton.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   //client side form validation
@@ -37,7 +43,7 @@ form.addEventListener("submit", e => {
   const data = {
     username: username.value,
     password: password.value,
-    confirmPassword: confirmPassword.value
+    confirmPassword: confirmPassword.value,
   };
 
   fetch(url, {
@@ -45,20 +51,20 @@ form.addEventListener("submit", e => {
     credentials: "include",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     //make sure to serialize your JSON body
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       if (data.errors && data.errors.length > 0) {
         data.errors.forEach(
-          err => (errorElement.innerHTML += `<li>${err.msg}</li>`)
+          (err) => (errorElement.innerHTML += `<li>${err.msg}</li>`)
         );
       } else {
         window.location.href = "/login";
       }
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 });

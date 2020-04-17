@@ -29,15 +29,35 @@ header {
   color: #15aefa;
 }
 
+.navLinks ul {
+  height: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 nav,
 a {
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: #555555;
-  background-color: #fafafa;
   text-decoration: none;
   list-style-type: none;
+}
+
+nav li {
+  padding: 0px 20px;
+}
+
+nav li a {
+  transition: all 0.3s ease 0s;
+  display: block;
+}
+
+nav li a:hover {
+  color: #15aefa;
 }
 
 .logoutBtn {
@@ -52,19 +72,6 @@ a {
 }
 
 .logoutBtn:hover {
-  color: #15aefa;
-}
-
-nav li {
-  display: inline-block;
-  padding: 0px 20px;
-}
-
-nav li a {
-  transition: all 0.3s ease 0s;
-}
-
-nav li a:hover {
   color: #15aefa;
 }
 
@@ -299,4 +306,85 @@ span {
   border: 2px solid #fe6060;
   outline: none;
   border-radius: 10px;
+}
+
+.toggle-button {
+  position: absolute;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #555555;
+  border-radius: 10px;
+}
+
+.toggle-button .bar:hover {
+  background-color: #15aefa;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle-button {
+    display: flex;
+  }
+
+  .navLinks {
+    display: none;
+    width: 100%;
+  }
+
+  .navLinks ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navLinks ul li {
+    text-align: center;
+    padding: 1rem;
+    background: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .navLinks ul li a {
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .navLinks.active {
+    display: flex;
+  }
+
+  .logoutBtn {
+    width: 100%;
+  }
+
+  .container {
+    width: 60%;
+    margin: 20% auto;
+  }
+
+  .flexContainer {
+    display: block;
+  }
+
+  .searchContainer {
+    width: 80%;
+  }
+
+  .listContainer {
+    width: 80%;
+    margin-left: 3%;
+    margin-top: 10%;
+  }
 }

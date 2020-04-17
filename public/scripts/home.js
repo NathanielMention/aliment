@@ -1,9 +1,15 @@
-const createnode = element => document.createElement(element);
+const createnode = (element) => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
+const toggleButton = document.getElementsByClassName("toggle-button")[0];
+const navLinks = document.getElementsByClassName("navLinks")[0];
+
+toggleButton.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
 
 //use event delgation to make foodlist clickable
-document.querySelector(".foodList").addEventListener("click", e => {
+document.querySelector(".foodList").addEventListener("click", (e) => {
   const userUl = document.querySelector(".userList");
   const target = e.target;
   if (target.matches("li")) {
@@ -14,7 +20,7 @@ document.querySelector(".foodList").addEventListener("click", e => {
     incrementCalories(target);
 
     //make userUL clickable and <li> removable
-    userLi.addEventListener("click", e => {
+    userLi.addEventListener("click", (e) => {
       if (target.matches("li")) {
         remove(userUl, userLi);
         decrementCalories(target);
@@ -39,17 +45,17 @@ const updateCalorieCount = () => {
   totalCalories.textContent = `Calories: ${calorieAmount}`;
 };
 
-const incrementCalories = target => {
+const incrementCalories = (target) => {
   calorieAmount += Number(target.dataset.calories);
   updateCalorieCount();
 };
 
-const decrementCalories = target => {
+const decrementCalories = (target) => {
   calorieAmount -= Number(target.dataset.calories);
   updateCalorieCount();
 };
 
-const submitFood = e => {
+const submitFood = (e) => {
   e.preventDefault();
   if (isGettingFood) {
     return;
@@ -68,13 +74,13 @@ const submitFood = e => {
 
   // takes user input value/food value and returns fetched data in ul
   getFood(foodInputValue)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       const foodList = data.hits;
       isGettingFood = false;
 
       //go through foodlist array one by one to create list of food
-      foodList.forEach(food => {
+      foodList.forEach((food) => {
         const li = createnode("li");
         const itemName = food.fields.item_name;
         const calories = food.fields.nf_calories;
@@ -87,10 +93,10 @@ const submitFood = e => {
         append(ul, li);
       });
     })
-    .catch(error => console.log(error));
+    .catch((error) => console.log(error));
 };
 
-const getFood = foodValue => {
+const getFood = (foodValue) => {
   //break down url of api into consts
   const api = "https://api.nutritionix.com/v1_1/search/";
   const alimentId = "&appId=67e4c01d";
@@ -109,7 +115,7 @@ form.addEventListener("submit", submitFood);
 const input = document.querySelector(".searchFood");
 
 //allow user to submit food with enter key
-input.addEventListener("keyup", e => {
+input.addEventListener("keyup", (e) => {
   const key = e.key || e.keyCode;
   if (key === "Enter" || key === "enter" || key === 13) {
     submitFood(e);
@@ -118,16 +124,16 @@ input.addEventListener("keyup", e => {
 
 const logOut = document.querySelector(".logOutButton");
 
-logOut.addEventListener("submit", e => {
+logOut.addEventListener("submit", (e) => {
   fetch("http://127.0.0.1:3000/logout", {
     method: "DELETE",
     credentials: "include",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   })
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
     .then(() => {
@@ -137,12 +143,12 @@ logOut.addEventListener("submit", e => {
 
 const saveBtn = document.getElementById("saveBtn");
 
-saveBtn.addEventListener("click", e => {
+saveBtn.addEventListener("click", (e) => {
   const userUl = document.querySelector(".userList");
   const data = {
     date: calenderDate.textContent,
     calories: calorieAmount,
-    food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim()
+    food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim(),
   };
 
   fetch("http://127.0.0.1:3000/home", {
@@ -150,15 +156,15 @@ saveBtn.addEventListener("click", e => {
     credentials: "include",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     //make sure to serialize your JSON body
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
-    .then(data => {
+    .then((data) => {
       console.log(data);
     });
 });

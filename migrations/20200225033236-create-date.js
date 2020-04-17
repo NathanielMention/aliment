@@ -5,33 +5,32 @@ module.exports = {
       date: {
         type: DataTypes.DATEONLY,
         primaryKey: true,
-        unique: "compoundKey"
       },
       userId: {
         type: DataTypes.INTEGER,
         references: {
           model: "users",
-          key: "userId"
+          key: "userId",
         },
         unique: "compoundKey",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
-        allowNull: false
+        allowNull: false,
       },
       nutritionId: {
         type: DataTypes.INTEGER,
         references: {
           model: "nutrition",
-          key: "nutritionId"
+          key: "nutritionId",
         },
         unique: "compoundKey",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable("calendar");
-  }
+  },
 };
