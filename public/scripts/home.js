@@ -141,7 +141,7 @@ logOut.addEventListener("submit", (e) => {
     });
 });
 
-const saveBtn = document.getElementById("saveBtn");
+const saveBtn = document.querySelector(".saveBtn");
 
 saveBtn.addEventListener("click", (e) => {
   const userUl = document.querySelector(".userList");
@@ -168,3 +168,13 @@ saveBtn.addEventListener("click", (e) => {
       console.log(data);
     });
 });
+
+//indicates successful save by button color change
+saveBtn.addEventListener("click", clickDelay);
+
+function clickDelay(e) {
+  e.target.classList.add("special");
+  setTimeout(function () {
+    e.target.classList.remove("special");
+  }, 2000);
+}

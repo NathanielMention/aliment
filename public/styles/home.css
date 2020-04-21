@@ -196,7 +196,7 @@ time {
   align-self: stretch;
 }
 
-#saveBtn {
+.saveBtn {
   border: 0;
   align-self: stretch;
   margin: 20px auto;
@@ -212,7 +212,7 @@ time {
   width: 50%;
 }
 
-#saveBtn:hover {
+.saveBtn:hover {
   background: #0192da;
 }
 
@@ -327,6 +327,11 @@ span {
 
 .toggle-button .bar:hover {
   background-color: #15aefa;
+}
+
+.special {
+  background: #04de0f;
+  border: 2px solid #04de0f;
 }
 
 @media (max-width: 600px) {
