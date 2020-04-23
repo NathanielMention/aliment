@@ -49,9 +49,14 @@ users.prototype.validPassword = async function (password) {
 };
 
 const calendar = db.define("calendar", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.DATEONLY,
-    primaryKey: true,
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -59,7 +64,6 @@ const calendar = db.define("calendar", {
       model: "users",
       key: "userId",
     },
-    unique: "compoundKey",
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
     allowNull: false,
@@ -70,7 +74,6 @@ const calendar = db.define("calendar", {
       model: "nutrition",
       key: "nutritionId",
     },
-    unique: "compoundKey",
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
     allowNull: false,
@@ -101,8 +104,6 @@ nutrition.belongsToMany(users, {
   through: calendar,
   foreignKey: "nutritionId",
 });
-//users.hasMany(calendar);
-//calendar.belongsTo(users, { foreignKey: "userId" });
 
 module.exports = {
   db,

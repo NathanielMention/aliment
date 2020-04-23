@@ -33,7 +33,19 @@ A few things that you can do on Aliment:
 
 ## Setup
 
-Describe how to install / setup your local environement / add link to demo version.
+Clone or download the repository:
+
+`git clone https://github.com/NathanielMention/aliment.git`
+
+(Must have Node.js installed)
+
+In the application directory run:
+
+`npm install`
+
+In the root application directory run:
+
+`nodemon`
 
 ## Credits
 

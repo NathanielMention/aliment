@@ -41,7 +41,7 @@ router.post(
       .custom((value, { req }) => {
         return users
           .findOne({ where: { username: req.body.username } })
-          .then(users => {
+          .then((users) => {
             if (users) {
               return Promise.reject("Username already exists");
             }
@@ -62,7 +62,7 @@ router.post(
       }
       // Indicates the success of this synchronous custom validator
       return true;
-    })
+    }),
   ],
   (req, res) => {
     const { username, password } = req.body;
@@ -74,7 +74,7 @@ router.post(
     users
       .create({
         username,
-        password
+        password,
       })
       .then(() => {
         res.json({ success: true });
@@ -101,7 +101,7 @@ router.post(
       .custom((value, { req }) => {
         return users
           .findOne({ where: { username: req.body.username } })
-          .then(users => {
+          .then((users) => {
             if (!users) {
               return Promise.reject("Username does not exists");
             }
@@ -115,13 +115,13 @@ router.post(
       .custom((value, { req }) => {
         return users
           .findOne({ where: { username: req.body.username } })
-          .then(async users => {
+          .then(async (users) => {
             if (users && !(await users.validPassword(value))) {
               return Promise.reject("Password is incorrect");
             }
             return true;
           });
-      })
+      }),
   ],
   passport.authenticate("local"),
   (req, res) => {
@@ -144,19 +144,19 @@ router.post("/home", (req, res) => {
   const userId = req.user.id;
   nutrition
     .create({
-      calories,
-      food
+      calories: Math.floor(calories),
+      food,
     })
-    .then(data => {
+    .then((data) => {
       const nutritionId = data.id;
       return calendar.create({
         date,
         userId,
-        nutritionId
+        nutritionId,
       });
     })
     .then(() => res.json({ success: true }))
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 router.get("/intake", checkAuthenticated.checkAuthenticated, (req, res) => {
