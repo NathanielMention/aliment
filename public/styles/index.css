@@ -294,6 +294,7 @@ span {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .toggle-button {
@@ -326,6 +327,10 @@ span {
     display: flex;
   }
 
+  .logoutBtn {
+    width: 100%;
+  }
+
   .container {
     width: 60%;
     margin: 20% auto;
@@ -343,5 +348,25 @@ span {
     width: 80%;
     margin-left: 3%;
     margin-top: 10%;
+  }
+}
+
+@media (max-width: 425px) {
+  .searchContainer {
+    margin-left: 0.5%;
+  }
+
+  .listContainer {
+    margin-left: 0.5%;
+  }
+}
+
+@media (max-width: 375px) {
+  .searchContainer {
+    margin-left: 0.1%;
+  }
+
+  .listContainer {
+    margin-left: 0.1%;
   }
 }

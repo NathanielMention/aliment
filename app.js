@@ -14,7 +14,7 @@ const methodOverride = require("method-override");
 //access passport from config folder
 const passport = require("passport");
 const initializePassport = require("./config/passport-config");
-initializePassport.initialize(passport, async id => {
+initializePassport.initialize(passport, async (id) => {
   try {
     const user = await users.findByPk(id);
     return user ? user : null;
@@ -36,7 +36,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
   })
 );
 app.use(passport.initialize());
@@ -49,7 +49,7 @@ app.use("/", aliment);
 //test DB
 db.authenticate()
   .then(() => console.log("Database connected.."))
-  .catch(err => console.log("Error:" + err));
+  .catch((err) => console.log("Error:" + err));
 db.sync().then(() => {
   console.log("synced database");
 });

@@ -164,9 +164,7 @@ saveBtn.addEventListener("click", (e) => {
     .then((res) => {
       return res.json();
     })
-    .then((data) => {
-      console.log(data);
-    });
+    .catch((err) => console.log(err));
 });
 
 //indicates successful save by button color change
@@ -178,3 +176,22 @@ function clickDelay(e) {
     e.target.classList.remove("special");
   }, 2000);
 }
+
+/*
+fetch("http://127.0.0.1:3000/intake", {
+  method: "GET",
+  credentials: "include",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  //make sure to serialize your JSON body
+  body: JSON.stringify(data),
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    console.log(data);
+  });
+*/

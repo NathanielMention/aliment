@@ -142,25 +142,37 @@ router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
 router.post("/home", (req, res) => {
   const { date, calories, food } = req.body;
   const userId = req.user.id;
-  nutrition
-    .create({
-      calories: Math.floor(calories),
-      food,
-    })
-    .then((data) => {
-      const nutritionId = data.id;
-      return calendar.create({
-        date,
-        userId,
-        nutritionId,
-      });
-    })
-    .then(() => res.json({ success: true }))
-    .catch((err) => console.log(err));
+  //search db for data, update existing data
+  const data = calendar.findOne({ where: { userId } });
+  if (data) {
+    nutrition.update(
+      { calories: Math.floor(calories), food },
+      { where: { calories: Math.floor(calories), food } }
+    );
+  } else {
+    nutrition
+      .create({
+        calories: Math.floor(calories),
+        food,
+      })
+      .then((data) => {
+        const nutritionId = data.id;
+        return calendar.create({
+          date,
+          userId,
+          nutritionId,
+        });
+      })
+      .then(() => res.json({ success: true }))
+      .catch((err) => console.log(err));
+  }
 });
 
 router.get("/intake", checkAuthenticated.checkAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname + "/../public/home.html"));
+  //query db for data, send data to client for display
+  calendar.findOne({ date }, { where: { userId } });
+  nutrition.findOne({ calories, food }, { where: { userId } });
+  res.json({ date, calories, food });
 });
 
 router.delete("/logout", (req, res) => {

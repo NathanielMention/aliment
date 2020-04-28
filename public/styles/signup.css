@@ -145,10 +145,17 @@ form button:hover {
   background-color: #15aefa;
 }
 
+@media (max-width: 650px) {
+  .navbar {
+    width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .toggle-button {
@@ -183,5 +190,30 @@ form button:hover {
 
   .signupForm {
     margin-top: 25%;
+    margin-left: 10%;
+  }
+}
+
+@media (max-width: 425px) {
+  .signupForm {
+    margin-top: 25%;
+    margin-left: 10%;
+  }
+}
+
+@media (max-width: 375px) {
+  .signupForm {
+    margin-top: 25%;
+    margin-left: 3%;
+  }
+}
+
+@media (max-width: 320px) {
+  .signupForm {
+    margin-top: 25%;
+    margin-left: 2%;
+  }
+  .navbar {
+    width: 120%;
   }
 }

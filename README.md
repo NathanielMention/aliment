@@ -45,7 +45,7 @@ In the application directory run:
 
 In the root application directory run:
 
-`nodemon`
+`nodemon app.js`
 
 ## Credits
 
