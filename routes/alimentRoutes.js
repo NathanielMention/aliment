@@ -139,13 +139,13 @@ router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/home.html"));
 });
 
-router.post("/home", (req, res) => {
+router.post("/home", async (req, res) => {
   const { date, calories, food } = req.body;
   const userId = req.user.id;
   //search db for data, update existing data
-  const data = calendar.findOne({ where: { userId } });
+  const data = await calendar.findOne({ where: { userId, date } });
   if (data) {
-    nutrition.update(
+    await nutrition.update(
       { calories: Math.floor(calories), food },
       { where: { calories: Math.floor(calories), food } }
     );
