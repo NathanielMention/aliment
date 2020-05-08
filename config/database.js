@@ -56,7 +56,7 @@ const calendar = db.define("calendar", {
     allowNull: false,
   },
   date: {
-    type: DataTypes.DATEONLY,
+    type: DataTypes.STRING(9999),
   },
   userId: {
     type: DataTypes.INTEGER,

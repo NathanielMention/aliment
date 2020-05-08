@@ -177,21 +177,65 @@ function clickDelay(e) {
   }, 2000);
 }
 
-/*
-fetch("http://127.0.0.1:3000/intake", {
+//fetch saved db data for specific date clicked
+const td = document.getElementsByTagName("td");
+for (var i = 0; i < td.length; i++) {
+  td[i].addEventListener("click", (e) => {
+    fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.calories === undefined || null) {
+          return;
+        } else {
+          calories = data.calories;
+          food = data.food;
+          let userFood = document.querySelector(".userList");
+          let userCalories = document.querySelector(".totalCalories");
+          userFood.textContent = food;
+          userCalories.textContent = `Calories: ${calories}`;
+          const userUl = document.querySelector(".userList");
+
+          userUl.addEventListener("click", (e) => {
+            const target = e.target;
+            if (target.matches("ul")) {
+              userUl.remove(userFood.textContent);
+              userCalories.textContent = `Calories: 0`;
+            }
+          });
+        }
+      });
+  });
+}
+//fetch saved userlist data from db for current date if available
+fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
   method: "GET",
   credentials: "include",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-  //make sure to serialize your JSON body
-  body: JSON.stringify(data),
 })
   .then((res) => {
     return res.json();
   })
   .then((data) => {
-    console.log(data);
+    if (data.calories === undefined || null) {
+      return;
+    } else {
+      calories = data.calories;
+      food = data.food;
+      let userFood = document.querySelector(".userList");
+      let userCalories = document.querySelector(".totalCalories");
+      userFood.textContent = food;
+      userCalories.textContent = `Calories: ${calories}`;
+    }
   });
-*/
