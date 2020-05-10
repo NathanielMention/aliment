@@ -21,7 +21,7 @@ let months = [
   "Sep",
   "Oct",
   "Nov",
-  "Dec"
+  "Dec",
 ];
 
 let monthAndYear = document.getElementById("monthAndYear");
@@ -70,7 +70,7 @@ function showCalendar(month, year) {
         break;
       }
       const cell = document.createElement("td");
-      cell.addEventListener("click", e => {
+      cell.addEventListener("click", (e) => {
         calenderDate.textContent = `${currentMonth + 1}/${
           cellText.textContent
         }/${currentYear}`;

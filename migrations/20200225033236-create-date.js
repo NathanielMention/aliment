@@ -3,7 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("calendar", {
       date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING(9999),
         primaryKey: true,
       },
       userId: {
