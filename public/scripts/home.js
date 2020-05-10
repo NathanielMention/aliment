@@ -196,18 +196,20 @@ for (var i = 0; i < td.length; i++) {
         if (data.calories === undefined || null) {
           return;
         } else {
-          calories = data.calories;
-          food = data.food;
-          let userFood = document.querySelector(".userList");
-          let userCalories = document.querySelector(".totalCalories");
-          userFood.textContent = food;
+          const userFood = document.querySelector(".userList");
+          const userCalories = document.querySelector(".totalCalories");
+          const li = createnode("li");
+          const food = data.food;
+          const calories = data.calories;
+          li.dataset.data = food;
+          li.textContent = `${food}`;
+          append(userFood, li);
           userCalories.textContent = `Calories: ${calories}`;
-          const userUl = document.querySelector(".userList");
 
-          userUl.addEventListener("click", (e) => {
+          userFood.addEventListener("click", (e) => {
             const target = e.target;
-            if (target.matches("ul")) {
-              userUl.remove(userFood.textContent);
+            if (target.matches("li")) {
+              li.remove(li.textContent);
               userCalories.textContent = `Calories: 0`;
             }
           });
