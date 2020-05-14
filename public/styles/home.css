@@ -69,6 +69,7 @@ nav li a:hover {
   font-weight: 500;
   font-size: 16px;
   color: #555555;
+  margin-top: auto;
 }
 
 .logoutBtn:hover {
@@ -308,6 +309,19 @@ span {
   border-radius: 10px;
 }
 
+.dataList li {
+  list-style: none;
+  padding: 2%;
+}
+
+.dataList li:hover {
+  border: 0;
+  background: #fe6060;
+  color: #ffffff;
+  border: 2px solid #fe6060;
+  outline: none;
+  border-radius: 10px;
+}
 .toggle-button {
   position: absolute;
   right: 1rem;
@@ -343,7 +357,7 @@ span {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 80%;
   }
 
   .toggle-button {
@@ -411,6 +425,9 @@ span {
 }
 
 @media (max-width: 375px) {
+  .navbar {
+    width: 85%;
+  }
   .searchContainer {
     margin-left: 0.1%;
   }

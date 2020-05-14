@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/NathanielMention/aliment.git"
   },
+  "engines": {
+    "node": "11.12.0"
+  },
   "author": "Nathaniel Mention",
   "license": "ISC",
   "bugs": {
