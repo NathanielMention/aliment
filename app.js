@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const session = require("express-session");
 const { users } = require("./config/database");
+const port = process.env.PORT || 5000;
 
 //overides post method so we can use app.delete
 const methodOverride = require("method-override");
@@ -55,5 +56,4 @@ db.sync().then(() => {
 });
 
 //listen to port
-app.listen(3000);
-console.log("You are listening to port 3000");
+app.listen(port, () => console.log(`You are listening to port ${port}!`));
