@@ -54,6 +54,6 @@ db.sync().then(() => {
   console.log("synced database");
 });
 
+const port = process.env.PORT || 3000;
 //listen to port
-app.listen(3000);
-console.log("You are listening to port 3000");
+app.listen(port, () => console.log("listening on port " + port));
