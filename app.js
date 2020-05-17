@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const session = require("express-session");
 const { users } = require("./config/database");
+const port = process.env.PORT || 5000;
 
 //overides post method so we can use app.delete
 const methodOverride = require("method-override");

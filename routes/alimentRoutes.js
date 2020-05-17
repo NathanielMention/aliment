@@ -139,16 +139,17 @@ router.get("/home", checkAuthenticated.checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname + "/../public/home.html"));
 });
 
-router.post("/home", (req, res) => {
+router.post("/home", async (req, res) => {
   const { date, calories, food } = req.body;
   const userId = req.user.id;
   //search db for data, update existing data
-  const data = calendar.findOne({ where: { userId } });
+  const data = await calendar.findOne({ where: { userId, date } });
   if (data) {
-    nutrition.update(
+    await nutrition.update(
       { calories: Math.floor(calories), food },
-      { where: { calories: Math.floor(calories), food } }
+      { where: { id: data.dataValues.nutritionId } }
     );
+    res.json({ success: true });
   } else {
     nutrition
       .create({
@@ -168,12 +169,28 @@ router.post("/home", (req, res) => {
   }
 });
 
-router.get("/intake", checkAuthenticated.checkAuthenticated, (req, res) => {
-  //query db for data, send data to client for display
-  calendar.findOne({ date }, { where: { userId } });
-  nutrition.findOne({ calories, food }, { where: { userId } });
-  res.json({ date, calories, food });
-});
+router.get(
+  "/intake",
+  checkAuthenticated.checkAuthenticated,
+  async (req, res) => {
+    const userId = req.user.id;
+    //query db for data, send data to client for display
+    const data = await calendar.findOne({
+      where: { userId, date: req.query.date },
+    });
+    if (!data) {
+      res.json({ msg: "no data for this date" });
+    } else {
+      const nutritionData = await nutrition.findOne({
+        where: { id: data.dataValues.nutritionId },
+      });
+      res.json({
+        calories: nutritionData.dataValues.calories,
+        food: nutritionData.dataValues.food,
+      });
+    }
+  }
+);
 
 router.delete("/logout", (req, res) => {
   req.logOut();

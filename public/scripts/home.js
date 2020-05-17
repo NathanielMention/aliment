@@ -42,7 +42,7 @@ let calorieAmount = 0;
 
 const updateCalorieCount = () => {
   let totalCalories = document.querySelector(".totalCalories");
-  totalCalories.textContent = `Calories: ${calorieAmount}`;
+  totalCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
 };
 
 const incrementCalories = (target) => {
@@ -177,21 +177,91 @@ function clickDelay(e) {
   }, 2000);
 }
 
-/*
-fetch("http://127.0.0.1:3000/intake", {
+//fetch saved db data for specific date clicked
+const td = document.getElementsByTagName("td");
+for (var i = 0; i < td.length; i++) {
+  td[i].addEventListener("click", (e) => {
+    fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.calories === undefined || null) {
+          return;
+        } else {
+          const userFood = document.querySelector(".dataList");
+          //clear list if new date clicked
+          if (userFood.children.length > 0) {
+            while (userFood.children.length > 0) {
+              remove(userFood, userFood.firstChild);
+            }
+          }
+          const userCalories = document.querySelector(".totalCalories");
+          const li = createnode("li");
+          const food = data.food;
+          //add food data to list
+          calorieAmount = data.calories;
+          const calories = data.calories;
+          li.dataset.data = calories;
+          li.textContent = `${food}`;
+          append(userFood, li);
+          userCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
+        }
+      });
+  });
+}
+//fetch saved userlist data from db for current date if available
+fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
   method: "GET",
   credentials: "include",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-  //make sure to serialize your JSON body
-  body: JSON.stringify(data),
 })
   .then((res) => {
     return res.json();
   })
   .then((data) => {
-    console.log(data);
+    if (data.calories === undefined || null) {
+      return;
+    } else {
+      const userFood = document.querySelector(".dataList");
+      //clear list if new date clicked
+      if (userFood.children.length > 0) {
+        while (userFood.children.length > 0) {
+          remove(userFood, userFood.firstChild);
+        }
+      }
+      const userCalories = document.querySelector(".totalCalories");
+      const li = createnode("li");
+      const food = data.food;
+      //add food data to list
+      calorieAmount = data.calories;
+      const calories = data.calories;
+      li.dataset.data = calories;
+      li.textContent = `${food}`;
+      append(userFood, li);
+      userCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
+    }
   });
-*/
+
+const dataList = document.querySelector(".dataList");
+//remove data from list
+dataList.addEventListener("click", (e) => {
+  const userCalories = document.querySelector(".totalCalories");
+  const target = e.target;
+  if (target.matches("li")) {
+    const li = dataList.firstChild;
+    li.remove();
+    calorieAmount -= target.getAttribute("data-data");
+    userCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
+  }
+});

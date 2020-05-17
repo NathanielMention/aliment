@@ -37,7 +37,7 @@ document.querySelector(".foodList").addEventListener("click", (e) => {
 
 const updateCalorieCount = () => {
   let totalCalories = document.querySelector(".totalCalories");
-  totalCalories.textContent = `Calories: ${calorieAmount}`;
+  totalCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
 };
 
 const incrementCalories = (target) => {
