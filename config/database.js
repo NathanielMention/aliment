@@ -8,9 +8,10 @@ const db = new Sequelize(
   config.production.username,
   config.production.password,
   {
-    host: "localhost",
+    host: config.production.host,
     dialect: "postgres",
     logging: false,
+    operatorsAliases: false,
     pool: {
       max: 5,
       min: 0,
