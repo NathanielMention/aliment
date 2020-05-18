@@ -13,6 +13,7 @@ const db = new Sequelize(
     logging: false,
     operatorsAliases: false,
     pool: {
+      connectionString: process.env.DATABASE_URL,
       max: 5,
       min: 0,
       acquire: 30000,
