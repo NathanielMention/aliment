@@ -30,9 +30,12 @@ const { db } = require("./config/database");
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+const PostgreSqlStore = require("connect-pg-simple")(session);
 app.use(
   session({
-    store: new (require("connect-pg-simple")(session))(),
+    store: new PostgreSqlStore({
+      conString: DATABASE_URL,
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
