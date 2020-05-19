@@ -125,7 +125,7 @@ input.addEventListener("keyup", (e) => {
 const logOut = document.querySelector(".logOutButton");
 
 logOut.addEventListener("submit", (e) => {
-  fetch("http://127.0.0.1:3000/logout", {
+  fetch("/logout", {
     method: "DELETE",
     credentials: "include",
     headers: {
@@ -151,7 +151,7 @@ saveBtn.addEventListener("click", (e) => {
     food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim(),
   };
 
-  fetch("http://127.0.0.1:3000/home", {
+  fetch("/home", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -181,7 +181,7 @@ function clickDelay(e) {
 const td = document.getElementsByTagName("td");
 for (var i = 0; i < td.length; i++) {
   td[i].addEventListener("click", (e) => {
-    fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
+    fetch(`/intake/?date=${calenderDate.textContent}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -218,7 +218,7 @@ for (var i = 0; i < td.length; i++) {
   });
 }
 //fetch saved userlist data from db for current date if available
-fetch(`http://127.0.0.1:3000/intake/?date=${calenderDate.textContent}`, {
+fetch(`/intake/?date=${calenderDate.textContent}`, {
   method: "GET",
   credentials: "include",
   headers: {
