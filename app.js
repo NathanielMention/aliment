@@ -30,12 +30,13 @@ const { db } = require("./config/database");
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const PostgreSqlStore = require("connect-pg-simple")(session);
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 app.use(
   session({
-    store: new PostgreSqlStore({
+    store: new SequelizeStore({
       conString: process.env.DATABASE_URL,
-      tableName: "user_sessions",
+      db: db,
+      table: "user_sessions",
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
