@@ -38,7 +38,7 @@ form.addEventListener("submit", (e) => {
     errorElement.innerText = messages.join("\n");
   }
 
-  const url = "http://127.0.0.1:3000/signup";
+  const url = "/signup";
 
   const data = {
     username: username.value,
