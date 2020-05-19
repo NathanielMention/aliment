@@ -1,5 +1,3 @@
-const dotenv = require("dotenv");
-dotenv.config();
 const createnode = (element) => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
