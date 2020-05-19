@@ -34,7 +34,7 @@ const PostgreSqlStore = require("connect-pg-simple")(session);
 app.use(
   session({
     store: new PostgreSqlStore({
-      conString: DATABASE_URL,
+      conString: process.env.DATABASE_URL,
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
