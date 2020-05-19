@@ -1,4 +1,5 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 const createnode = (element) => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
@@ -152,7 +153,7 @@ saveBtn.addEventListener("click", (e) => {
     food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim(),
   };
 
-  fetch(`${DATABASE_URL}/home`, {
+  fetch(`${process.env.DATABASE_URL}/home`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -182,14 +183,17 @@ function clickDelay(e) {
 const td = document.getElementsByTagName("td");
 for (var i = 0; i < td.length; i++) {
   td[i].addEventListener("click", (e) => {
-    fetch(`${DATABASE_URL}/intake/?date=${calenderDate.textContent}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `${process.env.DATABASE_URL}/intake/?date=${calenderDate.textContent}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -219,7 +223,7 @@ for (var i = 0; i < td.length; i++) {
   });
 }
 //fetch saved userlist data from db for current date if available
-fetch(`${DATABASE_URL}/intake/?date=${calenderDate.textContent}`, {
+fetch(`${process.env.DATABASE_URL}/intake/?date=${calenderDate.textContent}`, {
   method: "GET",
   credentials: "include",
   headers: {
