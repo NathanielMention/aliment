@@ -35,6 +35,7 @@ app.use(
   session({
     store: new PostgreSqlStore({
       conString: process.env.DATABASE_URL,
+      tableName: "user_sessions",
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,

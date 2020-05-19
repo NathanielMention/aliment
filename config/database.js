@@ -97,6 +97,19 @@ const nutrition = db.define("nutrition", {
   },
 });
 
+const user_sessions = db.define("user_sessions", {
+  sid: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
+  expires: {
+    type: DataTypes.DATE,
+  },
+  data: {
+    type: DataTypes.TEXT,
+  },
+});
+
 calendar.belongsTo(users, { foreignKey: "userId" });
 calendar.belongsTo(nutrition, { foreignKey: "nutritionId" });
 
@@ -112,4 +125,5 @@ module.exports = {
   users,
   calendar,
   nutrition,
+  user_sessions,
 };
