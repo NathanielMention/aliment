@@ -1,3 +1,4 @@
+require("dotenv").config();
 const createnode = (element) => document.createElement(element);
 const append = (parent, el) => parent.appendChild(el);
 const remove = (parent, el) => parent.removeChild(el);
@@ -151,7 +152,7 @@ saveBtn.addEventListener("click", (e) => {
     food: userUl.textContent.replace(/[\n\r]+|[\s]{2,}/g, " ").trim(),
   };
 
-  fetch("/home", {
+  fetch(`${DATABASE_URL}/home`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -181,7 +182,7 @@ function clickDelay(e) {
 const td = document.getElementsByTagName("td");
 for (var i = 0; i < td.length; i++) {
   td[i].addEventListener("click", (e) => {
-    fetch(`/intake/?date=${calenderDate.textContent}`, {
+    fetch(`${DATABASE_URL}/intake/?date=${calenderDate.textContent}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -218,7 +219,7 @@ for (var i = 0; i < td.length; i++) {
   });
 }
 //fetch saved userlist data from db for current date if available
-fetch(`/intake/?date=${calenderDate.textContent}`, {
+fetch(`${DATABASE_URL}/intake/?date=${calenderDate.textContent}`, {
   method: "GET",
   credentials: "include",
   headers: {
