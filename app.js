@@ -6,9 +6,6 @@ const app = express();
 const session = require("express-session");
 const { users } = require("./config/database");
 
-//overides post method so we can use app.delete
-const methodOverride = require("method-override");
-
 //access passport from config folder
 const passport = require("passport");
 const initializePassport = require("./config/passport-config");
