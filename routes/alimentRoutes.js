@@ -194,7 +194,7 @@ router.get(
 
 router.delete("/logout", (req, res) => {
   req.logOut();
-  res.send(status(200));
+  res.sendStatus(200);
 });
 
 module.exports = router;
