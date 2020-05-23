@@ -122,7 +122,7 @@ input.addEventListener("keyup", (e) => {
   }
 });
 
-const logOut = document.querySelector(".logOutBtn");
+const logOut = document.querySelector(".logoutBtn");
 
 logOut.addEventListener("click", (e) => {
   fetch("/logout", {
