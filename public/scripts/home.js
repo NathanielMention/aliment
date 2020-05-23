@@ -194,6 +194,11 @@ for (var i = 0; i < td.length; i++) {
       })
       .then((data) => {
         if (data.calories === undefined || null) {
+          if (userFood.children.length > 0) {
+            while (userFood.children.length > 0) {
+              remove(userFood, userFood.firstChild);
+            }
+          }
           return;
         } else {
           const userFood = document.querySelector(".dataList");
