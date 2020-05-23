@@ -133,9 +133,6 @@ logOut.addEventListener("submit", (e) => {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => {
-      return res.json();
-    })
     .then(() => {
       window.location.href = "/login";
       return false;
