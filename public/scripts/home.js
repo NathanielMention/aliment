@@ -193,6 +193,7 @@ for (var i = 0; i < td.length; i++) {
         return res.json();
       })
       .then((data) => {
+        const userFood = document.querySelector(".dataList");
         if (data.calories === undefined || null) {
           if (userFood.children.length > 0) {
             while (userFood.children.length > 0) {
@@ -201,7 +202,6 @@ for (var i = 0; i < td.length; i++) {
           }
           return;
         } else {
-          const userFood = document.querySelector(".dataList");
           //clear list if new date clicked
           if (userFood.children.length > 0) {
             while (userFood.children.length > 0) {
