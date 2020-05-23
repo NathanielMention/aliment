@@ -124,7 +124,7 @@ input.addEventListener("keyup", (e) => {
 
 const logOut = document.querySelector(".logOutButton");
 
-logOut.addEventListener("submit", (e) => {
+logOut.addEventListener("click", (e) => {
   fetch("/logout", {
     method: "DELETE",
     credentials: "include",
@@ -135,7 +135,6 @@ logOut.addEventListener("submit", (e) => {
   })
     .then(() => {
       window.location.href = "/login";
-      return false;
     })
     .catch((err) => {
       console.log(err);
