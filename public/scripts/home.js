@@ -194,12 +194,14 @@ for (var i = 0; i < td.length; i++) {
       })
       .then((data) => {
         const userFood = document.querySelector(".dataList");
+        const userCalories = document.querySelector(".totalCalories");
         if (data.calories === undefined || null) {
           if (userFood.children.length > 0) {
             while (userFood.children.length > 0) {
               remove(userFood, userFood.firstChild);
             }
           }
+          userCalories.textContent = `Calories: 0`;
           return;
         } else {
           //clear list if new date clicked
@@ -208,7 +210,6 @@ for (var i = 0; i < td.length; i++) {
               remove(userFood, userFood.firstChild);
             }
           }
-          const userCalories = document.querySelector(".totalCalories");
           const li = createnode("li");
           const food = data.food;
           //add food data to list
