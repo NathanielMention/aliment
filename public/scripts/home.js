@@ -137,7 +137,7 @@ logOut.addEventListener("submit", (e) => {
       return res.json();
     })
     .then(() => {
-      window.location.href = "/login";
+      window.location = "/login";
     });
 });
 
