@@ -236,17 +236,23 @@ fetch(`/intake/?date=${calenderDate.textContent}`, {
     return res.json();
   })
   .then((data) => {
+    const userFood = document.querySelector(".dataList");
+    const userCalories = document.querySelector(".totalCalories");
     if (data.calories === undefined || null) {
+      if (userFood.children.length > 0) {
+        while (userFood.children.length > 0) {
+          remove(userFood, userFood.firstChild);
+        }
+      }
+      userCalories.textContent = `Calories: 0`;
       return;
     } else {
-      const userFood = document.querySelector(".dataList");
       //clear list if new date clicked
       if (userFood.children.length > 0) {
         while (userFood.children.length > 0) {
           remove(userFood, userFood.firstChild);
         }
       }
-      const userCalories = document.querySelector(".totalCalories");
       const li = createnode("li");
       const food = data.food;
       //add food data to list
