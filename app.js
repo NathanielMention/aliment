@@ -43,7 +43,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride("_method"));
 
 //routes
 app.use("/", aliment);
