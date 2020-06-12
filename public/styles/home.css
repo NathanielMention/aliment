@@ -396,7 +396,7 @@ span {
   }
 
   .container {
-    width: 60%;
+    width: 75%;
     margin: 20% auto;
   }
 
@@ -429,6 +429,11 @@ span {
   .navbar {
     width: 85%;
   }
+
+  .container {
+    width: 80%;
+  }
+
   .searchContainer {
     margin-left: 0.1%;
   }

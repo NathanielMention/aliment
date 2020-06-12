@@ -107,10 +107,10 @@ for (var m = 1; m <= 12; m++) {
 }
 document.getElementById("month").innerHTML = monthOptions;
 //dynamic year drop down
-let start = 1900;
-let end = new Date().getFullYear();
+let start = new Date().getFullYear();
+let end = 2010;
 let options = `<option value=${end} >Year</option>`;
-for (let year = start; year <= end; year++) {
+for (let year = start; year >= end; year--) {
   options += `<option value=${year}>${year}</option>`;
 }
 document.getElementById("year").innerHTML = options;
