@@ -181,6 +181,7 @@ function clickDelay(e) {
 const td = document.getElementsByTagName("td");
 for (var i = 0; i < td.length; i++) {
   td[i].addEventListener("click", (e) => {
+    td[i].classList.add("highlight");
     fetch(`/intake/?date=${calenderDate.textContent}`, {
       method: "GET",
       credentials: "include",

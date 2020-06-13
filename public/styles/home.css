@@ -243,6 +243,14 @@ time {
   width: 28px;
 }
 
+.highlight {
+  background: #ffff62;
+  color: #ffffff;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+}
+
 .listContainer {
   align-items: center;
   height: 100%;

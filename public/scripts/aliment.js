@@ -116,3 +116,17 @@ input.addEventListener("keyup", (e) => {
     submitFood(e);
   }
 });
+
+//clear food intake if new date clicked
+const td = document.getElementsByTagName("td");
+for (var i = 0; i < td.length; i++) {
+  td[i].addEventListener("click", (e) => {
+    td[i].classList.add("highlight");
+    const userUl = document.querySelector(".userList");
+    if (userUl.children.length > 0) {
+      while (userUl.children.length > 0) {
+        remove(userUl, userUl.firstChild);
+      }
+    }
+  });
+}
