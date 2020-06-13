@@ -121,7 +121,7 @@ input.addEventListener("keyup", (e) => {
 const td = document.getElementsByTagName("td");
 for (var i = 0; i < td.length; i++) {
   td[i].addEventListener("click", (e) => {
-    td[i].classList.add("highlight");
+    td.classList.add("highlight");
     const userUl = document.querySelector(".userList");
     if (userUl.children.length > 0) {
       while (userUl.children.length > 0) {
