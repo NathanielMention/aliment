@@ -177,53 +177,62 @@ function clickDelay(e) {
   }, 2000);
 }
 
-//fetch saved db data for specific date clicked
+//add highlight class to td
+const table = document.querySelector("table");
 const td = document.getElementsByTagName("td");
-for (var i = 0; i < td.length; i++) {
-  td[i].addEventListener("click", (e) => {
-    td.classList.add("highlight");
-    fetch(`/intake/?date=${calenderDate.textContent}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const userFood = document.querySelector(".dataList");
-        const userCalories = document.querySelector(".totalCalories");
-        if (data.calories === undefined || null) {
-          if (userFood.children.length > 0) {
-            while (userFood.children.length > 0) {
-              remove(userFood, userFood.firstChild);
-            }
-          }
-          userCalories.textContent = `Calories: 0`;
-          return;
-        } else {
-          //clear list if new date clicked
-          if (userFood.children.length > 0) {
-            while (userFood.children.length > 0) {
-              remove(userFood, userFood.firstChild);
-            }
-          }
-          const li = createnode("li");
-          const food = data.food;
-          //add food data to list
-          calorieAmount = data.calories;
-          const calories = data.calories;
-          li.dataset.data = calories;
-          li.textContent = `${food}`;
-          append(userFood, li);
-          userCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
+table.addEventListener("click", (e) => {
+  const target = e.target;
+  const highlightEl = document.querySelector(".highlight");
+  if (highlightEl) {
+    highlightEl.classList.remove("highlight");
+  }
+  if (target.matches("td")) {
+    target.classList.add("highlight");
+  }
+});
+
+//fetch saved db data for specific date clicked
+fetch(`/intake/?date=${calenderDate.textContent}`, {
+  method: "GET",
+  credentials: "include",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+})
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    const userFood = document.querySelector(".dataList");
+    const userCalories = document.querySelector(".totalCalories");
+    if (data.calories === undefined || null) {
+      if (userFood.children.length > 0) {
+        while (userFood.children.length > 0) {
+          remove(userFood, userFood.firstChild);
         }
-      });
+      }
+      userCalories.textContent = `Calories: 0`;
+      return;
+    } else {
+      //clear list if new date clicked
+      if (userFood.children.length > 0) {
+        while (userFood.children.length > 0) {
+          remove(userFood, userFood.firstChild);
+        }
+      }
+      const li = createnode("li");
+      const food = data.food;
+      //add food data to list
+      calorieAmount = data.calories;
+      const calories = data.calories;
+      li.dataset.data = calories;
+      li.textContent = `${food}`;
+      append(userFood, li);
+      userCalories.textContent = `Calories: ${Math.floor(calorieAmount)}`;
+    }
   });
-}
+
 //fetch saved userlist data from db for current date if available
 fetch(`/intake/?date=${calenderDate.textContent}`, {
   method: "GET",

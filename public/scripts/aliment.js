@@ -118,15 +118,23 @@ input.addEventListener("keyup", (e) => {
 });
 
 //clear food intake if new date clicked
+const table = document.querySelector("table");
 const td = document.getElementsByTagName("td");
-for (var i = 0; i < td.length; i++) {
-  td[i].addEventListener("click", (e) => {
-    td.classList.add("highlight");
-    const userUl = document.querySelector(".userList");
-    if (userUl.children.length > 0) {
-      while (userUl.children.length > 0) {
-        remove(userUl, userUl.firstChild);
-      }
+table.addEventListener("click", (e) => {
+  const target = e.target;
+  const highlightEl = document.querySelector(".highlight");
+  if (highlightEl) {
+    highlightEl.classList.remove("highlight");
+  }
+  if (target.matches("td")) {
+    target.classList.add("highlight");
+  }
+  const userUl = document.querySelector(".userList");
+  if (userUl.children.length > 0) {
+    while (userUl.children.length > 0) {
+      remove(userUl, userUl.firstChild);
     }
-  });
-}
+  }
+  let totalCalories = document.querySelector(".totalCalories");
+  totalCalories.textContent = `Calories: 0`;
+});
