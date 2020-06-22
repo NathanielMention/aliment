@@ -198,21 +198,24 @@ form button:hover {
 @media (max-width: 425px) {
   .loginForm {
     margin-top: 25%;
-    margin-left: 10%;
+    margin-left: 1%;
+    width: auto;
   }
 }
 
 @media (max-width: 375px) {
   .loginForm {
     margin-top: 25%;
-    margin-left: 3%;
+    margin-left: 1%;
+    width: auto;
   }
 }
 
 @media (max-width: 320px) {
   .loginForm {
     margin-top: 25%;
-    margin-left: 2%;
+    margin-left: 1%;
+    width: 90%;
   }
   .navbar {
     width: 120%;
