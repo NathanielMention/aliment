@@ -5,6 +5,7 @@
 ## Table of contents
 
 - [Introduction](#Introduction)
+- [Design](#Design)
 - [Features](#Features)
 - [Technologies](#Technologies)
 - [Setup](#Setup)
@@ -13,6 +14,12 @@
 ## Introduction
 
 Aliment provides a seamless process for users to track daily calorie intake
+
+## Design
+
+![signup](/public/assets/signup.png)
+![cal](/public/assets/cal.png)
+![search](/public/assets/search.png)
 
 ## Features
 
